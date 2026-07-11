@@ -1,0 +1,52 @@
+[
+  {
+    "_id": "1",
+    "company": "PRAN-RFL Group",
+    "role": "AI Software Engineer (Sub Assistant Manager) — MIS",
+    "description": "Building production-grade AI systems for enterprise analytics, recruitment automation, semantic search, and computer vision workflows used in real business environments.",
+    "responsibilities": [
+      "Built Uttoron, a natural-language-to-SQL AI assistant using FastAPI, ChromaDB, Oracle, and LLM-driven query generation",
+      "Designed schema-aware RAG pipelines enabling real-time SQL execution and analytics over 50M+ enterprise records",
+      "Developed an AI Recruitment Automation platform processing 10,000+ CVs with semantic job matching, Oracle VECTOR search, and MiniLM reranking",
+      "Built a real-time facial recognition attendance system using YOLOv8n-Face, MobileFaceNet, HRIS authentication, and live monitoring dashboards"
+    ],
+    "technologies": ["Python", "FastAPI", "React", "ChromaDB", "Oracle", "Oracle VECTOR", "Sentence Transformers", "MiniLM", "YOLOv8n-Face", "MobileFaceNet", "LLM APIs"],
+    "startDate": "2025-11",
+    "current": true,
+    "order": 1
+  },
+  {
+    "_id": "2",
+    "company": "PRAN-RFL Group",
+    "role": "AI Software Engineer Intern — MIS",
+    "description": "Contributed to enterprise AI assistant development, focusing on schema-aware NL2SQL generation, RAG optimization, query validation, and on-premise deployment support.",
+    "responsibilities": [
+      "Implemented schema-aware query generation and validation logic for an NL2SQL AI assistant",
+      "Improved RAG pipeline performance to increase query accuracy and reduce report generation time",
+      "Assisted in on-premise deployment and reliability improvements for enterprise AI workflows",
+      "Worked with internal data systems to make reporting and analytics more accessible to business users"
+    ],
+    "technologies": ["Python", "FastAPI", "Oracle", "ChromaDB", "RAG", "NL2SQL", "Sentence Transformers", "LLM APIs", "React"],
+    "startDate": "2025-06",
+    "endDate": "2025-11",
+    "current": false,
+    "order": 2
+  },
+  {
+    "_id": "3",
+    "company": "Universe IT Institute (UITI)",
+    "role": "Full Stack Engineer Intern",
+    "description": "Developed AI-powered and full-stack web applications, working across backend APIs, frontend interfaces, ML-powered features, and scalable application workflows.",
+    "responsibilities": [
+      "Built full-stack web applications using Python, FastAPI, React, Next.js, Node.js, and PHP",
+      "Developed and integrated REST APIs connecting frontend interfaces with backend services",
+      "Implemented ML-powered features and supported frontend-backend functionality for scalable applications",
+      "Worked across application logic, API integration, and UI implementation to deliver complete web solutions"
+    ],
+    "technologies": ["Python", "FastAPI", "React", "Next.js", "Node.js", "PHP", "REST APIs", "JavaScript", "MySQL"],
+    "startDate": "2024-12",
+    "endDate": "2025-05",
+    "current": false,
+    "order": 3
+  }
+]
