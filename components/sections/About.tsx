@@ -4,12 +4,14 @@ import { motion } from 'framer-motion'
 import {
   BrainCircuit,
   Rocket,
-  Database,
   Code2,
   Trophy,
   FileText,
   Cpu,
   Eye,
+  GraduationCap,
+  CalendarDays,
+  MapPin,
 } from 'lucide-react'
 import SectionHeader from '@/components/ui/SectionHeader'
 
@@ -40,6 +42,27 @@ const traits = [
     icon: Rocket,
     title: 'Full-Stack AI Systems',
     desc: 'Developing complete AI products with FastAPI, React, automation pipelines, dashboards, authentication, APIs, and deployment-ready workflows.',
+  },
+]
+
+const education = [
+  {
+    degree: 'Bachelor of Science in Computer Science and Engineering',
+    institution: 'BRAC University',
+    duration: 'July 2020 – January 2025',
+    location: 'Dhaka, Bangladesh',
+  },
+  {
+    degree: 'Higher Secondary School Certificate (HSC)',
+    institution: 'Notre Dame College',
+    duration: 'July 2017 – July 2019',
+    location: 'Dhaka, Bangladesh',
+  },
+  {
+    degree: 'Secondary School Certificate (SSC)',
+    institution: "Bindubashini Govt. Boys' High School",
+    duration: 'January 2012 – March 2017',
+    location: 'Tangail, Bangladesh',
   },
 ]
 
@@ -239,6 +262,80 @@ export default function About() {
               </motion.div>
             ))}
           </div>
+
+          {/* Education Card */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.88, y: 30 }}
+            whileInView={{ opacity: 1, scale: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+            className="glass relative overflow-hidden rounded-2xl p-6 border border-cyan-500/15 hover:border-cyan-500/30 hover:shadow-xl hover:shadow-cyan-500/10 transition-all"
+          >
+            <div className="absolute -right-16 -top-16 w-40 h-40 rounded-full bg-cyan-500/10 blur-3xl" />
+            <div className="absolute -left-16 -bottom-16 w-40 h-40 rounded-full bg-purple-500/10 blur-3xl" />
+
+            <div className="relative z-10">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-11 h-11 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center">
+                  <GraduationCap size={22} className="text-cyan-500" />
+                </div>
+
+                <div>
+                  <p className="text-xs font-mono uppercase tracking-[0.24em] text-cyan-600 dark:text-cyan-400">
+                    Education
+                  </p>
+                  <h3 className="text-slate-900 dark:text-white font-bold text-lg">
+                    Academic Background
+                  </h3>
+                </div>
+              </div>
+
+              <div className="relative pl-5">
+                <div className="absolute left-[5px] top-2 bottom-2 w-px bg-gradient-to-b from-cyan-500/60 via-purple-500/40 to-transparent" />
+
+                <div className="space-y-5">
+                  {education.map((edu, index) => (
+                    <motion.div
+                      key={edu.institution}
+                      initial={{ opacity: 0, x: 18 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{
+                        duration: 0.45,
+                        delay: index * 0.08,
+                        ease: [0.22, 1, 0.36, 1],
+                      }}
+                      className="relative"
+                    >
+                      <span className="absolute -left-[22px] top-1.5 w-3 h-3 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 shadow-lg shadow-cyan-500/20" />
+
+                      <div className="rounded-xl border border-black/5 dark:border-white/5 bg-white/35 dark:bg-white/[0.025] px-4 py-4 hover:border-cyan-500/20 transition-colors">
+                        <h4 className="text-slate-900 dark:text-white font-semibold text-sm leading-snug">
+                          {edu.institution}
+                        </h4>
+
+                        <p className="text-slate-500 dark:text-slate-400 text-xs leading-relaxed mt-1">
+                          {edu.degree}
+                        </p>
+
+                        <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-3 text-[11px] font-mono text-slate-400">
+                          <span className="inline-flex items-center gap-1.5">
+                            <CalendarDays size={12} className="text-cyan-500" />
+                            {edu.duration}
+                          </span>
+
+                          <span className="inline-flex items-center gap-1.5">
+                            <MapPin size={12} className="text-purple-500" />
+                            {edu.location}
+                          </span>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
