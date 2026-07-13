@@ -14,11 +14,12 @@ import AnimatedHeroLeftBackground from '@/components/ui/AnimatedHeroLeftBackgrou
 
 const ROLES = [
   'AI Software Engineer',
+  'Machine Learning Engineer',
   'LLM Engineer',
   'RAG Engineer',
   'NL2SQL Developer',
-  'Full-Stack AI Developer',
   'Computer Vision Engineer',
+  'Full-Stack AI Developer',
 ]
 
 export default function Hero() {
@@ -171,17 +172,17 @@ export default function Hero() {
                   </div>
 
                   <span className="text-[10px] px-2 py-0.5 rounded-full border border-cyan-500/20 text-slate-500 dark:text-slate-400 bg-cyan-500/5">
-                    AI roles
+                    AI / ML roles
                   </span>
                 </div>
 
                 <h3 className="text-[13px] font-bold text-slate-900 dark:text-white leading-snug mb-1">
-                  Open to AI Engineering Opportunities
+                  Open to AI & ML Engineering Opportunities
                 </h3>
 
                 <p className="text-[11px] leading-relaxed text-slate-500 dark:text-slate-400">
-                  RAG, NL2SQL, semantic search, computer vision, and full-stack
-                  AI product roles.
+                  LLMs, RAG, NL2SQL, machine learning, computer vision, and
+                  full-stack AI product roles.
                 </p>
               </div>
             </div>
@@ -231,10 +232,11 @@ export default function Hero() {
           transition={{ delay: 0.9, duration: 0.6 }}
           className="text-slate-500 dark:text-slate-400 text-base md:text-lg max-w-2xl mx-auto leading-relaxed mb-10"
         >
-          I build production-grade AI systems — from RAG pipelines and NL2SQL
-          assistants to semantic search, Oracle VECTOR-powered matching, and
-          computer vision solutions. Turning enterprise data into intelligent,
-          reliable, and scalable products.
+          I build production-grade AI and machine learning systems — from RAG
+          pipelines, NL2SQL assistants, and semantic search to predictive ML
+          models, computer vision solutions, and Oracle VECTOR-powered matching.
+          Turning enterprise data into intelligent, reliable, and scalable
+          products.
         </motion.p>
 
         {/* Location */}

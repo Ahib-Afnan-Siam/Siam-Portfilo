@@ -201,7 +201,7 @@ export default function Research() {
       <SectionHeader
         label="05 / Research & Blogs"
         title="Research & Blogs"
-        subtitle="Research work and technical writing on federated learning, RAG, NL2SQL, edge computing, privacy-preserving AI, and modern AI engineering."
+        subtitle="Research work and technical writing on neural networks, federated learning, RAG, NL2SQL, edge computing, privacy-preserving AI, and modern AI engineering."
       />
 
       <div className="space-y-12 max-w-6xl mx-auto">

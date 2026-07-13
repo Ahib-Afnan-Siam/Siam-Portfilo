@@ -12,6 +12,8 @@ import recruitmentImage from '@/assets/images/Recruitement.jpeg'
 import aluminumDefectImage from '@/assets/images/aluminum_defect.png'
 import drishtyImage from '@/assets/images/Drishti.png'
 import facebookImage from '@/assets/images/facebook.png'
+import carImage from '@/assets/images/car.png'
+import footballImage from '@/assets/images/football.png'
 
 interface Project {
   _id: string
@@ -162,6 +164,45 @@ const PROJECTS: Project[] = [
     featured: true,
     order: 6,
   },
+  {
+    _id: '7',
+    title: 'Car Price Prediction',
+    description:
+      'A machine learning project that predicts car price categories as low, medium, or high using features such as year, fuel type, seller type, transmission, and ownership history. Multiple classifiers were trained and evaluated to compare prediction performance.',
+    technologies: [
+      'KNN',
+      'Logistic Regression',
+      'SVM',
+      'Decision Tree',
+      'Machine Learning',
+      'Classification',
+    ],
+    demoText: 'No Live Demo',
+    githubUrl: 'https://github.com/Ahib-Afnan-Siam/Car-Price-Predition.git',
+    imageUrl: carImage,
+    featured: false,
+    order: 7,
+  },
+  {
+    _id: '8',
+    title: 'Football Match Result Prediction',
+    description:
+      'A football match outcome prediction project that classifies results as Home Win, Draw, or Away Win using historical match data, team statistics, betting odds, and engineered features. Gradient Boosting achieved the best accuracy at 75.48%.',
+    technologies: [
+      'Gradient Boosting',
+      'Random Forest',
+      'Decision Tree',
+      'SVM',
+      'KNN',
+      'Logistic Regression',
+    ],
+    demoText: 'No Live Demo',
+    githubUrl:
+      'https://github.com/Ahib-Afnan-Siam/Football-Match-Result-Prediciton.git',
+    imageUrl: footballImage,
+    featured: false,
+    order: 8,
+  },
 ]
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
@@ -278,7 +319,7 @@ export default function Projects() {
       <SectionHeader
         label="04 / Projects"
         title="Selected Work"
-        subtitle="Enterprise AI systems and full-stack automation projects I have built across NL2SQL, recruitment automation, meeting intelligence, computer vision, and social automation."
+        subtitle="Enterprise AI systems, full-stack automation, computer vision, and machine learning projects I have built across real-world and research-driven use cases."
       />
 
       <div className="flex justify-center gap-3 mb-12">

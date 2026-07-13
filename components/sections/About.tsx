@@ -5,16 +5,17 @@ import {
   BrainCircuit,
   Rocket,
   Database,
-  BookOpen,
   Code2,
   Trophy,
   FileText,
+  Cpu,
+  Eye,
 } from 'lucide-react'
 import SectionHeader from '@/components/ui/SectionHeader'
 
 const stats = [
   { value: '50M+', label: 'Data Records Analyzed' },
-  { value: '6+', label: 'Enterprise AI Systems Engineered' },
+  { value: '8+', label: 'AI & ML Projects Built' },
   { value: '60%', label: 'Screening Process Reduced' },
   { value: '500+', label: 'LeetCode Solved' },
 ]
@@ -22,23 +23,23 @@ const stats = [
 const traits = [
   {
     icon: BrainCircuit,
-    title: 'LLM Engineering',
+    title: 'LLM & RAG Engineering',
     desc: 'Building production-grade RAG systems, NL2SQL assistants, semantic search, and LLM-powered enterprise tools.',
   },
   {
-    icon: Database,
-    title: 'Enterprise Data AI',
-    desc: 'Designing schema-aware AI pipelines over large Oracle datasets, including Oracle VECTOR search and real-time analytics.',
+    icon: Cpu,
+    title: 'Machine Learning',
+    desc: 'Working with classification models, feature engineering, model evaluation, KNN, SVM, Decision Tree, Random Forest, and Gradient Boosting.',
+  },
+  {
+    icon: Eye,
+    title: 'Computer Vision & Research',
+    desc: 'Developing real-world vision systems with YOLOv8, OpenCV, defect detection, facial recognition, CNNs, InvNets, and federated learning research.',
   },
   {
     icon: Rocket,
     title: 'Full-Stack AI Systems',
-    desc: 'Developing complete AI products with FastAPI, React, automation pipelines, dashboards, authentication, and deployment-ready workflows.',
-  },
-  {
-    icon: BookOpen,
-    title: 'Problem Solver',
-    desc: 'Strong foundation in algorithms, system design, prompt engineering, debugging, and AI-assisted development workflows.',
+    desc: 'Developing complete AI products with FastAPI, React, automation pipelines, dashboards, authentication, APIs, and deployment-ready workflows.',
   },
 ]
 
@@ -48,7 +49,7 @@ export default function About() {
       <SectionHeader
         label="01 / About"
         title="About Me"
-        subtitle="I build practical AI systems that turn complex enterprise data into useful, reliable, and scalable products."
+        subtitle="I build practical AI, machine learning, and computer vision systems that turn complex data into reliable, scalable, and useful products."
       />
 
       <div className="grid lg:grid-cols-2 gap-16 items-start">
@@ -68,7 +69,7 @@ export default function About() {
             , an AI Software Engineer focused on building systems at the
             intersection of{' '}
             <span className="text-purple-600 dark:text-purple-400 font-semibold">
-              LLMs, RAG, semantic search
+              LLMs, machine learning, computer vision, semantic search
             </span>
             , and enterprise automation.
           </p>
@@ -77,15 +78,25 @@ export default function About() {
             I currently work in the MIS department at PRAN-RFL Group, where I
             build production-ready AI systems for real business environments.
             My work includes Uttoron, a natural-language-to-SQL assistant,
-            schema-aware RAG pipelines over 50M+ records, and AI-powered
-            recruitment automation.
+            schema-aware RAG pipelines over 50M+ records, AI-powered
+            recruitment automation, meeting intelligence, and computer
+            vision-based monitoring systems.
+          </p>
+
+          <p className="text-slate-500 dark:text-slate-400 leading-relaxed text-left">
+            Alongside enterprise AI systems, I have also built machine learning
+            and computer vision projects such as car price prediction, football
+            match result prediction, aluminum defect detection, and facial
+            recognition monitoring. My research interests include federated
+            learning, plant disease classification, CNNs, and Involutional
+            Neural Networks.
           </p>
 
           <p className="text-slate-500 dark:text-slate-400 leading-relaxed text-left">
             I enjoy designing AI products end to end — from data processing,
-            vector search, reranking, and LLM integration to backend APIs,
-            dashboards, authentication, and user-facing workflows that create
-            measurable impact.
+            feature engineering, vector search, reranking, and LLM integration
+            to backend APIs, dashboards, authentication, and user-facing
+            workflows that create measurable impact.
           </p>
 
           <div className="flex flex-wrap gap-2 pt-2">
@@ -97,7 +108,23 @@ export default function About() {
               'React',
               'Next.js',
               'Node.js',
+              'Vite',
+              'Tailwind CSS',
+              'Axios',
               'Laravel',
+              'Machine Learning',
+              'Classification',
+              'Feature Engineering',
+              'Model Evaluation',
+              'KNN',
+              'SVM',
+              'Random Forest',
+              'Gradient Boosting',
+              'PyTorch',
+              'OpenCV',
+              'YOLOv8',
+              'CNNs',
+              'Federated Learning',
               'RAG',
               'NL2SQL',
               'Semantic Search',
@@ -105,7 +132,6 @@ export default function About() {
               'ChromaDB',
               'Sentence Transformers',
               'MiniLM',
-              'OpenCV',
               'Docker',
               'Prompt Engineering',
               'AI Agents',
