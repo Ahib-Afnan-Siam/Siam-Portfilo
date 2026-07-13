@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import type { ElementType } from 'react'
+import type { ComponentType } from 'react'
 import { motion } from 'framer-motion'
 import {
   BrainCircuit,
@@ -61,12 +61,14 @@ type SkillCategory =
   | 'concepts'
   | 'workflow'
 
+type SkillIcon = ComponentType<any>
+
 type SkillItem = {
   _id: string
   name: string
   category: SkillCategory
   order: number
-  icon: ElementType
+  icon: SkillIcon
 }
 
 const SKILLS: SkillItem[] = [
