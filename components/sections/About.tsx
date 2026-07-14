@@ -170,12 +170,12 @@ export default function About() {
           </div>
 
           {/* Profile buttons */}
-          <div className="pt-4 flex flex-wrap gap-3">
+          <div className="pt-4 grid grid-cols-1 sm:flex sm:flex-wrap gap-3">
             <a
               href="/Ahib_Afnan_CV.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-cyan-500/40 text-cyan-600 dark:text-cyan-400 hover:bg-cyan-500/10 hover:scale-105 transition-all text-sm font-medium"
+              className="inline-flex w-full sm:w-auto items-center justify-center gap-2 px-6 py-3 rounded-lg border border-cyan-500/40 text-cyan-600 dark:text-cyan-400 hover:bg-cyan-500/10 hover:scale-105 transition-all text-sm font-medium"
             >
               <FileText size={16} />
               View Resume
@@ -185,7 +185,7 @@ export default function About() {
               href="https://leetcode.com/u/Ahib_Afnan_Siam/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-amber-400/40 text-amber-600 dark:text-amber-400 bg-amber-400/5 hover:bg-amber-400/10 hover:border-amber-400/60 hover:scale-105 transition-all text-sm font-medium shadow-lg shadow-amber-400/5"
+              className="inline-flex w-full sm:w-auto items-center justify-center gap-2 px-6 py-3 rounded-lg border border-amber-400/40 text-amber-600 dark:text-amber-400 bg-amber-400/5 hover:bg-amber-400/10 hover:border-amber-400/60 hover:scale-105 transition-all text-sm font-medium shadow-lg shadow-amber-400/5"
             >
               <Code2 size={16} />
               View My LeetCode Profile
@@ -195,7 +195,7 @@ export default function About() {
               href="https://www.hackerrank.com/profile/ahibafnan99"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-emerald-500/40 text-emerald-600 dark:text-emerald-400 bg-emerald-500/5 hover:bg-emerald-500/10 hover:border-emerald-500/60 hover:scale-105 transition-all text-sm font-medium shadow-lg shadow-emerald-500/5"
+              className="inline-flex w-full sm:w-auto items-center justify-center gap-2 px-6 py-3 rounded-lg border border-emerald-500/40 text-emerald-600 dark:text-emerald-400 bg-emerald-500/5 hover:bg-emerald-500/10 hover:border-emerald-500/60 hover:scale-105 transition-all text-sm font-medium shadow-lg shadow-emerald-500/5"
             >
               <Trophy size={16} />
               View My HackerRank Profile
@@ -223,12 +223,13 @@ export default function About() {
                   delay: i * 0.1,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className="glass rounded-2xl p-6 text-center border-gradient"
+                className="glass rounded-2xl p-4 sm:p-6 text-center border-gradient"
               >
                 <p className="text-3xl font-bold text-gradient mb-1">
                   {stat.value}
                 </p>
-                <p className="text-slate-500 dark:text-slate-400 text-xs whitespace-nowrap">
+
+                <p className="text-slate-500 dark:text-slate-400 text-xs leading-snug max-w-[130px] mx-auto">
                   {stat.label}
                 </p>
               </motion.div>

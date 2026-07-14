@@ -37,15 +37,30 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 72px;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   font-family: var(--font-inter), system-ui, sans-serif;
+  max-width: 100%;
   overflow-x: hidden;
   transition: background-color 0.3s ease, color 0.3s ease;
   -webkit-tap-highlight-color: transparent;
+}
+
+/* Global responsive safety */
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+}
+
+section {
+  width: 100%;
 }
 
 /* Hide the native cursor ONLY on desktop */
@@ -136,7 +151,7 @@ body {
   }
 
   .container-wide {
-    @apply w-full max-w-[1700px] mx-auto;
+    @apply w-full max-w-[1500px] mx-auto;
   }
 
   .heading-xl {
@@ -320,4 +335,12 @@ canvas {
   .hero-lottie-left-bg {
     display: none;
   }
+}
+
+/* ─── Text Clamp ─────────────────────────────────────────────────────────────── */
+.line-clamp-5 {
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }

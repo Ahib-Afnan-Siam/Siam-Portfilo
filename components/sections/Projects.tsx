@@ -248,7 +248,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           {project.title}
         </h3>
 
-        <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-4 text-left">
+        <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-4 text-left line-clamp-5">
           {project.description}
         </p>
 

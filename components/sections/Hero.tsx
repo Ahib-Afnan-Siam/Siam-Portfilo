@@ -197,7 +197,7 @@ export default function Hero() {
           opacity: contentOpacity,
           y: contentY,
         }}
-        className="hero-content relative z-10 text-center px-6 max-w-5xl mx-auto -mt-10 md:-mt-14"
+        className="hero-content relative z-10 text-center px-4 sm:px-6 max-w-5xl mx-auto -mt-6 sm:-mt-10 md:-mt-14"
       >
         {/* Heading */}
         <motion.h1
@@ -259,18 +259,18 @@ export default function Hero() {
             duration: 0.6,
             ease: [0.22, 1, 0.36, 1],
           }}
-          className="flex flex-wrap items-center justify-center gap-4 mb-16"
+          className="grid grid-cols-1 sm:flex sm:flex-wrap items-center justify-center gap-4 mb-14 sm:mb-16"
         >
           <a
             href="#projects"
-            className="px-8 py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 to-purple-600 text-white font-semibold hover:opacity-90 hover:scale-105 transition-all shadow-lg shadow-cyan-500/25 glow-cyan"
+            className="inline-flex w-full sm:w-auto items-center justify-center text-center px-8 py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 to-purple-600 text-white font-semibold hover:opacity-90 hover:scale-105 transition-all shadow-lg shadow-cyan-500/25 glow-cyan"
           >
             View My Work
           </a>
 
           <a
             href="#contact"
-            className="px-8 py-3.5 rounded-xl border border-slate-300 dark:border-white/10 glass text-slate-700 dark:text-slate-200 font-semibold hover:border-cyan-500/40 hover:scale-105 transition-all"
+            className="inline-flex w-full sm:w-auto items-center justify-center text-center px-8 py-3.5 rounded-xl border border-slate-300 dark:border-white/10 glass text-slate-700 dark:text-slate-200 font-semibold hover:border-cyan-500/40 hover:scale-105 transition-all"
           >
             Get in Touch
           </a>
