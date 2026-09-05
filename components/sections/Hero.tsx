@@ -105,7 +105,7 @@ export default function Hero() {
 
       hireButton =
         clickableElements.find(
-          (el) => el.textContent?.trim().toLowerCase() === 'hire me'
+          (el) => el.textContent?.trim().toLowerCase() === "let's talk"
         ) ?? null
 
       if (!hireButton) return
@@ -144,7 +144,7 @@ export default function Hero() {
       {/* Gradient overlay */}
       <div className="absolute inset-0 z-[2] bg-gradient-radial from-transparent via-transparent to-[var(--bg-primary)] pointer-events-none opacity-80" />
 
-      {/* Hire Me hover/intro popup */}
+      {/* Let's Talk hover/intro popup */}
       <AnimatePresence>
         {showHirePopup && (
           <motion.div

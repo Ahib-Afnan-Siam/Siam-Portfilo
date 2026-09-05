@@ -101,7 +101,7 @@ export default function Navbar() {
             href="/contact"
             className="px-4 py-2 rounded-lg border border-cyan-500/40 text-cyan-600 dark:text-cyan-400 text-sm font-medium hover:bg-cyan-500/10 transition-colors whitespace-nowrap"
           >
-            Hire Me
+            Let's Talk
           </a>
         </div>
 
