@@ -25,7 +25,7 @@ const PUBLICATIONS: Publication[] = [
       'This study proposes using Involutional Neural Networks with federated learning to classify plant diseases in a decentralized, privacy-preserving manner. By using location-specific and channel-agnostic kernels, InvNets address the computational inefficiencies and privacy risks of traditional CNN-based approaches such as ResNet50 and VGG16. While ResNet50 achieved the highest overall accuracy, InvNets provided a stronger balance of performance and resource efficiency for scalable early disease detection in resource-constrained agricultural environments.',
     category: 'Federated Learning',
     type: 'Research Paper',
-    status: 'Paper Under Review',
+    status: 'Under Review — Computers and Electronics in Agriculture',
   },
   {
     id: 'b1',

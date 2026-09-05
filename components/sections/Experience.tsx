@@ -11,12 +11,13 @@ const EXPERIENCES: Experience[] = [
     company: 'PRAN-RFL Group',
     role: 'AI Software Engineer (Sub Assistant Manager) — MIS',
     description:
-      'Building production-grade AI systems for enterprise analytics, recruitment automation, semantic search, and computer vision workflows used across real business environments.',
+      'Building and deploying production-grade AI systems for enterprise analytics, recruitment intelligence, meeting automation, semantic search, and computer vision workflows used across real business environments.',
     responsibilities: [
       'Built Uttoron, a natural-language-to-SQL AI assistant using FastAPI, ChromaDB, Oracle, and LLM-driven query generation for enterprise reporting.',
       'Designed schema-aware RAG pipelines enabling real-time SQL execution and analytics over 50M+ enterprise records.',
-      'Developed a full-stack AI Recruitment Automation system processing 10,000+ CVs with semantic job matching, Oracle VECTOR search, and MiniLM reranking.',
-      'Designed an explainable 0–100 hybrid ranking system combining vector similarity and reranker scores, reducing manual screening effort by 60%.',
+      'Developed Hire360, a full-stack AI recruitment intelligence platform processing 10,000+ CVs with semantic candidate search, Oracle VECTOR retrieval, and MiniLM reranking.',
+      'Designed an explainable 0–100 hybrid candidate ranking system combining vector similarity and reranker scores, reducing manual screening effort by 60%.',
+      'Engineered MeetOS, an AI meeting agent for Google Meet and Microsoft Teams using Playwright and Whisper for auto-join, participant tracking, transcription, AI summaries, and PDF report generation.',
       'Developed a real-time facial recognition attendance system using YOLOv8n-Face, MobileFaceNet, HRIS authentication, and live multi-camera monitoring dashboards.',
     ],
     technologies: [
@@ -28,6 +29,8 @@ const EXPERIENCES: Experience[] = [
       'Oracle VECTOR',
       'Sentence Transformers',
       'MiniLM',
+      'Playwright',
+      'Whisper',
       'YOLOv8n-Face',
       'MobileFaceNet',
       'LLM APIs',
@@ -37,6 +40,7 @@ const EXPERIENCES: Experience[] = [
     current: true,
     order: 1,
   },
+
   {
     _id: '2',
     company: 'PRAN-RFL Group',
@@ -65,6 +69,7 @@ const EXPERIENCES: Experience[] = [
     current: false,
     order: 2,
   },
+
   {
     _id: '3',
     company: 'Universe IT Institute (UITI)',
@@ -97,6 +102,7 @@ const EXPERIENCES: Experience[] = [
 
 function formatDate(d: string) {
   const [y, m] = d.split('-')
+
   return new Date(Number(y), Number(m) - 1).toLocaleDateString('en-US', {
     month: 'short',
     year: 'numeric',
@@ -105,11 +111,14 @@ function formatDate(d: string) {
 
 export default function Experience() {
   return (
-    <section id="experience" className="section-padding container-wide">
+    <section
+      id="experience"
+      className="section-padding container-wide"
+    >
       <SectionHeader
         label="02 / Experience"
         title="Work Experience"
-        subtitle="My journey through enterprise AI engineering, full-stack development, RAG systems, NL2SQL, semantic search, and production-ready automation."
+        subtitle="My journey through enterprise AI engineering, RAG and NL2SQL systems, semantic search, AI automation, computer vision, and full-stack development."
       />
 
       <div className="relative">
@@ -122,9 +131,20 @@ export default function Experience() {
             return (
               <motion.div
                 key={exp._id}
-                initial={{ opacity: 0, scale: 0.88, x: isLeft ? -60 : 60 }}
-                whileInView={{ opacity: 1, scale: 1, x: 0 }}
-                viewport={{ once: true, margin: '-60px' }}
+                initial={{
+                  opacity: 0,
+                  scale: 0.88,
+                  x: isLeft ? -60 : 60,
+                }}
+                whileInView={{
+                  opacity: 1,
+                  scale: 1,
+                  x: 0,
+                }}
+                viewport={{
+                  once: true,
+                  margin: '-60px',
+                }}
                 transition={{
                   duration: 0.65,
                   delay: i * 0.08,
@@ -138,29 +158,33 @@ export default function Experience() {
 
                 <div
                   className={`md:w-[46%] ${
-                    isLeft ? 'md:mr-auto md:pr-12' : 'md:ml-auto md:pl-12'
+                    isLeft
+                      ? 'md:mr-auto md:pr-12'
+                      : 'md:ml-auto md:pl-12'
                   }`}
                 >
                   <div className="glass rounded-2xl p-6 border-gradient hover:shadow-lg hover:shadow-cyan-500/10 hover:scale-[1.02] transition-all group">
-                    <div className="flex items-start justify-between mb-3">
+                    <div className="flex items-start justify-between gap-4 mb-3">
                       <div>
                         <h3 className="text-slate-900 dark:text-white font-bold text-lg group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
                           {exp.role}
                         </h3>
+
                         <p className="text-cyan-600 dark:text-cyan-400 font-semibold">
                           {exp.company}
                         </p>
                       </div>
 
                       {exp.current && (
-                        <span className="px-2.5 py-1 rounded-full text-xs font-medium bg-green-500/10 text-green-600 dark:text-green-400 border border-green-500/20">
+                        <span className="shrink-0 px-2.5 py-1 rounded-full text-xs font-medium bg-green-500/10 text-green-600 dark:text-green-400 border border-green-500/20">
                           Current
                         </span>
                       )}
                     </div>
 
-                    <div className="flex items-center gap-1 text-slate-400 text-xs font-mono mb-4">
+                    <div className="flex items-center gap-1.5 text-slate-400 text-xs font-mono mb-4">
                       <Calendar size={12} />
+
                       <span>
                         {formatDate(exp.startDate)} —{' '}
                         {exp.current
@@ -175,27 +199,28 @@ export default function Experience() {
                       {exp.description}
                     </p>
 
-                    <ul className="space-y-1.5 mb-5">
-                      {exp.responsibilities.map((r, j) => (
+                    <ul className="space-y-2 mb-5">
+                      {exp.responsibilities.map((responsibility, j) => (
                         <li
                           key={j}
-                          className="flex gap-2 text-slate-500 dark:text-slate-400 text-sm"
+                          className="flex gap-2 text-slate-500 dark:text-slate-400 text-sm leading-relaxed"
                         >
                           <span className="text-cyan-500 mt-0.5 shrink-0">
                             ▸
                           </span>
-                          {r}
+
+                          <span>{responsibility}</span>
                         </li>
                       ))}
                     </ul>
 
                     <div className="flex flex-wrap gap-1.5">
-                      {exp.technologies.map((t) => (
+                      {exp.technologies.map((technology) => (
                         <span
-                          key={t}
+                          key={technology}
                           className="px-2.5 py-0.5 rounded-full text-xs font-mono text-purple-600 dark:text-purple-300 bg-purple-500/10 border border-purple-500/20"
                         >
-                          {t}
+                          {technology}
                         </span>
                       ))}
                     </div>

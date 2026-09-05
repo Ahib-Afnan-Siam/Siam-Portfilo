@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import type { ComponentType } from 'react'
 import { motion } from 'framer-motion'
+
 import {
   BrainCircuit,
   Database,
@@ -10,7 +11,6 @@ import {
   Search,
   Eye,
   Cpu,
-  Box,
   Network,
   ShieldCheck,
   Bug,
@@ -25,7 +25,13 @@ import {
   Braces,
   ServerCog,
   Code2,
+  GitBranch,
+  SlidersHorizontal,
+  ScanSearch,
+  Gauge,
+  Boxes,
 } from 'lucide-react'
+
 import {
   SiPython,
   SiTypescript,
@@ -36,7 +42,6 @@ import {
   SiNodedotjs,
   SiLaravel,
   SiReact,
-  SiVite,
   SiNextdotjs,
   SiTailwindcss,
   SiBootstrap,
@@ -48,18 +53,19 @@ import {
   SiOpencv,
   SiGit,
   SiGithub,
-  SiPytest,
-  SiJest,
 } from 'react-icons/si'
+
 import SectionHeader from '@/components/ui/SectionHeader'
 
 type SkillCategory =
   | 'languages'
-  | 'ai'
+  | 'machineLearning'
+  | 'deepLearning'
+  | 'generativeAI'
   | 'frameworks'
   | 'database'
   | 'concepts'
-  | 'workflow'
+  | 'aiEngineering'
 
 type SkillIcon = ComponentType<any>
 
@@ -72,113 +78,576 @@ type SkillItem = {
 }
 
 const SKILLS: SkillItem[] = [
+  // =========================================================
   // Languages
-  { _id: 'lang1', name: 'Python', category: 'languages', order: 1, icon: SiPython },
-  { _id: 'lang2', name: 'TypeScript', category: 'languages', order: 2, icon: SiTypescript },
-  { _id: 'lang3', name: 'JavaScript (ES6+)', category: 'languages', order: 3, icon: SiJavascript },
-  { _id: 'lang4', name: 'C/C++', category: 'languages', order: 4, icon: SiCplusplus },
-  { _id: 'lang5', name: 'SQL', category: 'languages', order: 5, icon: Database },
-  { _id: 'lang6', name: 'PHP', category: 'languages', order: 6, icon: SiPhp },
-  { _id: 'lang7', name: 'C# (basic)', category: 'languages', order: 7, icon: Code2 },
+  // =========================================================
+  {
+    _id: 'lang1',
+    name: 'Python',
+    category: 'languages',
+    order: 1,
+    icon: SiPython,
+  },
+  {
+    _id: 'lang2',
+    name: 'TypeScript',
+    category: 'languages',
+    order: 2,
+    icon: SiTypescript,
+  },
+  {
+    _id: 'lang3',
+    name: 'JavaScript (ES6+)',
+    category: 'languages',
+    order: 3,
+    icon: SiJavascript,
+  },
+  {
+    _id: 'lang4',
+    name: 'C/C++',
+    category: 'languages',
+    order: 4,
+    icon: SiCplusplus,
+  },
+  {
+    _id: 'lang5',
+    name: 'SQL',
+    category: 'languages',
+    order: 5,
+    icon: Database,
+  },
+  {
+    _id: 'lang6',
+    name: 'PHP',
+    category: 'languages',
+    order: 6,
+    icon: SiPhp,
+  },
+  {
+    _id: 'lang7',
+    name: 'C# (Basic)',
+    category: 'languages',
+    order: 7,
+    icon: Code2,
+  },
 
-  // AI, Machine Learning & Research
-  { _id: 'ai1', name: 'Machine Learning', category: 'ai', order: 8, icon: BrainCircuit },
-  { _id: 'ai2', name: 'Supervised Learning', category: 'ai', order: 9, icon: Layers },
-  { _id: 'ai3', name: 'Classification Models', category: 'ai', order: 10, icon: BarChart3 },
-  { _id: 'ai4', name: 'Feature Engineering', category: 'ai', order: 11, icon: Search },
-  { _id: 'ai5', name: 'Model Evaluation', category: 'ai', order: 12, icon: BarChart3 },
-  { _id: 'ai6', name: 'KNN', category: 'ai', order: 13, icon: Cpu },
-  { _id: 'ai7', name: 'Logistic Regression', category: 'ai', order: 14, icon: BarChart3 },
-  { _id: 'ai8', name: 'SVM', category: 'ai', order: 15, icon: Cpu },
-  { _id: 'ai9', name: 'Decision Tree', category: 'ai', order: 16, icon: Layers },
-  { _id: 'ai10', name: 'Random Forest', category: 'ai', order: 17, icon: Layers },
-  { _id: 'ai11', name: 'Gradient Boosting', category: 'ai', order: 18, icon: Sparkles },
-  { _id: 'ai12', name: 'PyTorch', category: 'ai', order: 19, icon: SiPytorch },
-  { _id: 'ai13', name: 'CNNs', category: 'ai', order: 20, icon: Network },
-  { _id: 'ai14', name: 'Involutional Neural Networks', category: 'ai', order: 21, icon: BrainCircuit },
-  { _id: 'ai15', name: 'Federated Learning', category: 'ai', order: 22, icon: Network },
-  { _id: 'ai16', name: 'Plant Disease Classification', category: 'ai', order: 23, icon: Eye },
-  { _id: 'ai17', name: 'Agricultural AI', category: 'ai', order: 24, icon: Sparkles },
-  { _id: 'ai18', name: 'OpenCV', category: 'ai', order: 25, icon: SiOpencv },
-  { _id: 'ai19', name: 'Computer Vision', category: 'ai', order: 26, icon: Eye },
-  { _id: 'ai20', name: 'YOLOv8', category: 'ai', order: 27, icon: Eye },
-  { _id: 'ai21', name: 'EfficientAD', category: 'ai', order: 28, icon: BrainCircuit },
-  { _id: 'ai22', name: 'RAG', category: 'ai', order: 29, icon: BrainCircuit },
-  { _id: 'ai23', name: 'Semantic Search', category: 'ai', order: 30, icon: Search },
-  { _id: 'ai24', name: 'Vector Search', category: 'ai', order: 31, icon: Network },
-  { _id: 'ai25', name: 'Cross-Encoder Reranking', category: 'ai', order: 32, icon: Layers },
-  { _id: 'ai26', name: 'LLM Integration', category: 'ai', order: 33, icon: Bot },
-  { _id: 'ai27', name: 'Ollama', category: 'ai', order: 34, icon: Bot },
-  { _id: 'ai28', name: 'OpenRouter', category: 'ai', order: 35, icon: Network },
-  { _id: 'ai29', name: 'Groq', category: 'ai', order: 36, icon: Cpu },
-  { _id: 'ai30', name: 'FAISS', category: 'ai', order: 37, icon: Database },
-  { _id: 'ai31', name: 'Sentence Transformers', category: 'ai', order: 38, icon: Sparkles },
+  // =========================================================
+  // Machine Learning
+  // =========================================================
+  {
+    _id: 'ml1',
+    name: 'Scikit-learn',
+    category: 'machineLearning',
+    order: 8,
+    icon: BrainCircuit,
+  },
+  {
+    _id: 'ml2',
+    name: 'Supervised Learning',
+    category: 'machineLearning',
+    order: 9,
+    icon: Layers,
+  },
+  {
+    _id: 'ml3',
+    name: 'Unsupervised Learning',
+    category: 'machineLearning',
+    order: 10,
+    icon: Network,
+  },
+  {
+    _id: 'ml4',
+    name: 'Classification',
+    category: 'machineLearning',
+    order: 11,
+    icon: BarChart3,
+  },
+  {
+    _id: 'ml5',
+    name: 'Regression',
+    category: 'machineLearning',
+    order: 12,
+    icon: Gauge,
+  },
+  {
+    _id: 'ml6',
+    name: 'Clustering',
+    category: 'machineLearning',
+    order: 13,
+    icon: Boxes,
+  },
+  {
+    _id: 'ml7',
+    name: 'Feature Engineering',
+    category: 'machineLearning',
+    order: 14,
+    icon: SlidersHorizontal,
+  },
+  {
+    _id: 'ml8',
+    name: 'Model Evaluation',
+    category: 'machineLearning',
+    order: 15,
+    icon: BarChart3,
+  },
+  {
+    _id: 'ml9',
+    name: 'Cross-Validation',
+    category: 'machineLearning',
+    order: 16,
+    icon: GitBranch,
+  },
+  {
+    _id: 'ml10',
+    name: 'Hyperparameter Tuning',
+    category: 'machineLearning',
+    order: 17,
+    icon: SlidersHorizontal,
+  },
+  {
+    _id: 'ml11',
+    name: 'Ensemble Learning',
+    category: 'machineLearning',
+    order: 18,
+    icon: Layers,
+  },
 
+  // =========================================================
+  // Deep Learning & Computer Vision
+  // =========================================================
+  {
+    _id: 'dl1',
+    name: 'PyTorch',
+    category: 'deepLearning',
+    order: 19,
+    icon: SiPytorch,
+  },
+  {
+    _id: 'dl2',
+    name: 'CNNs',
+    category: 'deepLearning',
+    order: 20,
+    icon: BrainCircuit,
+  },
+  {
+    _id: 'dl3',
+    name: 'RNNs',
+    category: 'deepLearning',
+    order: 21,
+    icon: Network,
+  },
+  {
+    _id: 'dl4',
+    name: 'LSTM',
+    category: 'deepLearning',
+    order: 22,
+    icon: Network,
+  },
+  {
+    _id: 'dl5',
+    name: 'GRU',
+    category: 'deepLearning',
+    order: 23,
+    icon: Cpu,
+  },
+  {
+    _id: 'dl6',
+    name: 'Transfer Learning',
+    category: 'deepLearning',
+    order: 24,
+    icon: Workflow,
+  },
+  {
+    _id: 'dl7',
+    name: 'Vision Transformers (ViT)',
+    category: 'deepLearning',
+    order: 25,
+    icon: BrainCircuit,
+  },
+  {
+    _id: 'dl8',
+    name: 'Image Classification',
+    category: 'deepLearning',
+    order: 26,
+    icon: Eye,
+  },
+  {
+    _id: 'dl9',
+    name: 'Object Detection',
+    category: 'deepLearning',
+    order: 27,
+    icon: ScanSearch,
+  },
+  {
+    _id: 'dl10',
+    name: 'OpenCV',
+    category: 'deepLearning',
+    order: 28,
+    icon: SiOpencv,
+  },
+  {
+    _id: 'dl11',
+    name: 'Federated Learning',
+    category: 'deepLearning',
+    order: 29,
+    icon: Network,
+  },
+
+  // =========================================================
+  // Generative AI & Information Retrieval
+  // =========================================================
+  {
+    _id: 'gen1',
+    name: 'RAG',
+    category: 'generativeAI',
+    order: 30,
+    icon: BrainCircuit,
+  },
+  {
+    _id: 'gen2',
+    name: 'Semantic Search',
+    category: 'generativeAI',
+    order: 31,
+    icon: Search,
+  },
+  {
+    _id: 'gen3',
+    name: 'Vector Search',
+    category: 'generativeAI',
+    order: 32,
+    icon: Network,
+  },
+  {
+    _id: 'gen4',
+    name: 'Cross-Encoder Reranking',
+    category: 'generativeAI',
+    order: 33,
+    icon: Layers,
+  },
+  {
+    _id: 'gen5',
+    name: 'LLM Integration',
+    category: 'generativeAI',
+    order: 34,
+    icon: Bot,
+  },
+  {
+    _id: 'gen6',
+    name: 'Ollama',
+    category: 'generativeAI',
+    order: 35,
+    icon: Bot,
+  },
+  {
+    _id: 'gen7',
+    name: 'OpenRouter',
+    category: 'generativeAI',
+    order: 36,
+    icon: Network,
+  },
+  {
+    _id: 'gen8',
+    name: 'Groq',
+    category: 'generativeAI',
+    order: 37,
+    icon: Cpu,
+  },
+  {
+    _id: 'gen9',
+    name: 'FAISS',
+    category: 'generativeAI',
+    order: 38,
+    icon: Database,
+  },
+  {
+    _id: 'gen10',
+    name: 'Sentence Transformers',
+    category: 'generativeAI',
+    order: 39,
+    icon: Sparkles,
+  },
+  {
+    _id: 'gen11',
+    name: 'NL2SQL',
+    category: 'generativeAI',
+    order: 40,
+    icon: Database,
+  },
+  {
+    _id: 'gen12',
+    name: 'Agentic Workflows',
+    category: 'generativeAI',
+    order: 41,
+    icon: Workflow,
+  },
+
+  // =========================================================
   // Frameworks & Libraries
-  { _id: 'fw1', name: 'FastAPI', category: 'frameworks', order: 39, icon: SiFastapi },
-  { _id: 'fw2', name: 'Node.js', category: 'frameworks', order: 40, icon: SiNodedotjs },
-  { _id: 'fw3', name: 'React 18', category: 'frameworks', order: 41, icon: SiReact },
-  { _id: 'fw4', name: 'Next.js', category: 'frameworks', order: 42, icon: SiNextdotjs },
-  { _id: 'fw5', name: 'Vite', category: 'frameworks', order: 43, icon: SiVite },
-  { _id: 'fw6', name: 'Tailwind CSS', category: 'frameworks', order: 44, icon: SiTailwindcss },
-  { _id: 'fw7', name: 'Axios', category: 'frameworks', order: 45, icon: Network },
-  { _id: 'fw8', name: 'Laravel', category: 'frameworks', order: 46, icon: SiLaravel },
-  { _id: 'fw9', name: 'Bootstrap', category: 'frameworks', order: 47, icon: SiBootstrap },
-  { _id: 'fw10', name: 'Pydantic', category: 'frameworks', order: 48, icon: ShieldCheck },
-  { _id: 'fw11', name: 'Chart.js', category: 'frameworks', order: 49, icon: SiChartdotjs },
+  // =========================================================
+  {
+    _id: 'fw1',
+    name: 'FastAPI',
+    category: 'frameworks',
+    order: 42,
+    icon: SiFastapi,
+  },
+  {
+    _id: 'fw2',
+    name: 'Node.js',
+    category: 'frameworks',
+    order: 43,
+    icon: SiNodedotjs,
+  },
+  {
+    _id: 'fw3',
+    name: 'Laravel',
+    category: 'frameworks',
+    order: 44,
+    icon: SiLaravel,
+  },
+  {
+    _id: 'fw4',
+    name: 'React',
+    category: 'frameworks',
+    order: 45,
+    icon: SiReact,
+  },
+  {
+    _id: 'fw5',
+    name: 'Next.js',
+    category: 'frameworks',
+    order: 46,
+    icon: SiNextdotjs,
+  },
+  {
+    _id: 'fw6',
+    name: 'Tailwind CSS',
+    category: 'frameworks',
+    order: 47,
+    icon: SiTailwindcss,
+  },
+  {
+    _id: 'fw7',
+    name: 'Bootstrap',
+    category: 'frameworks',
+    order: 48,
+    icon: SiBootstrap,
+  },
+  {
+    _id: 'fw8',
+    name: 'Pydantic',
+    category: 'frameworks',
+    order: 49,
+    icon: ShieldCheck,
+  },
+  {
+    _id: 'fw9',
+    name: 'Chart.js',
+    category: 'frameworks',
+    order: 50,
+    icon: SiChartdotjs,
+  },
 
+  // =========================================================
   // Databases & Infrastructure
-  { _id: 'db1', name: 'Oracle 26ai', category: 'database', order: 50, icon: Database },
-  { _id: 'db2', name: 'Oracle VECTOR', category: 'database', order: 51, icon: Network },
-  { _id: 'db3', name: 'BLOB', category: 'database', order: 52, icon: Box },
-  { _id: 'db4', name: 'CLOB', category: 'database', order: 53, icon: FileCode },
-  { _id: 'db5', name: 'MySQL', category: 'database', order: 54, icon: SiMysql },
-  { _id: 'db6', name: 'SQLite', category: 'database', order: 55, icon: SiSqlite },
-  { _id: 'db7', name: 'ChromaDB', category: 'database', order: 56, icon: Database },
-  { _id: 'db8', name: 'Docker', category: 'database', order: 57, icon: SiDocker },
-  { _id: 'db9', name: 'APScheduler', category: 'database', order: 58, icon: ServerCog },
+  // =========================================================
+  {
+    _id: 'db1',
+    name: 'Oracle Database / Oracle 26ai (VECTOR)',
+    category: 'database',
+    order: 51,
+    icon: Database,
+  },
+  {
+    _id: 'db2',
+    name: 'MySQL',
+    category: 'database',
+    order: 52,
+    icon: SiMysql,
+  },
+  {
+    _id: 'db3',
+    name: 'SQLite',
+    category: 'database',
+    order: 53,
+    icon: SiSqlite,
+  },
+  {
+    _id: 'db4',
+    name: 'ChromaDB',
+    category: 'database',
+    order: 54,
+    icon: Database,
+  },
+  {
+    _id: 'db5',
+    name: 'Docker',
+    category: 'database',
+    order: 55,
+    icon: SiDocker,
+  },
+  {
+    _id: 'db6',
+    name: 'APScheduler',
+    category: 'database',
+    order: 56,
+    icon: ServerCog,
+  },
 
+  // =========================================================
   // Developer Tools & Concepts
-  { _id: 'dev1', name: 'Git', category: 'concepts', order: 59, icon: SiGit },
-  { _id: 'dev2', name: 'GitHub', category: 'concepts', order: 60, icon: SiGithub },
-  { _id: 'dev3', name: 'REST APIs', category: 'concepts', order: 61, icon: Network },
-  { _id: 'dev4', name: 'Unit Testing', category: 'concepts', order: 62, icon: FlaskConical },
-  { _id: 'dev5', name: 'pytest', category: 'concepts', order: 63, icon: SiPytest },
-  { _id: 'dev6', name: 'Jest', category: 'concepts', order: 64, icon: SiJest },
-  { _id: 'dev7', name: 'Debugging', category: 'concepts', order: 65, icon: Bug },
-  { _id: 'dev8', name: 'Code Reviews', category: 'concepts', order: 66, icon: Eye },
-  { _id: 'dev9', name: 'OOP', category: 'concepts', order: 67, icon: Braces },
-  { _id: 'dev10', name: 'Data Structures', category: 'concepts', order: 68, icon: Layers },
-  { _id: 'dev11', name: 'Algorithms', category: 'concepts', order: 69, icon: Cpu },
-  { _id: 'dev12', name: 'Authentication', category: 'concepts', order: 70, icon: KeyRound },
-  { _id: 'dev13', name: 'Authorization', category: 'concepts', order: 71, icon: ShieldCheck },
-  { _id: 'dev14', name: 'NL2SQL', category: 'concepts', order: 72, icon: Database },
-  { _id: 'dev15', name: 'Full-Stack AI Development', category: 'concepts', order: 73, icon: BrainCircuit },
+  // =========================================================
+  {
+    _id: 'dev1',
+    name: 'Git',
+    category: 'concepts',
+    order: 57,
+    icon: SiGit,
+  },
+  {
+    _id: 'dev2',
+    name: 'GitHub',
+    category: 'concepts',
+    order: 58,
+    icon: SiGithub,
+  },
+  {
+    _id: 'dev3',
+    name: 'REST APIs',
+    category: 'concepts',
+    order: 59,
+    icon: Network,
+  },
+  {
+    _id: 'dev4',
+    name: 'Unit Testing (pytest / Jest)',
+    category: 'concepts',
+    order: 60,
+    icon: FlaskConical,
+  },
+  {
+    _id: 'dev5',
+    name: 'Debugging',
+    category: 'concepts',
+    order: 61,
+    icon: Bug,
+  },
+  {
+    _id: 'dev6',
+    name: 'Code Reviews',
+    category: 'concepts',
+    order: 62,
+    icon: Eye,
+  },
+  {
+    _id: 'dev7',
+    name: 'OOP',
+    category: 'concepts',
+    order: 63,
+    icon: Braces,
+  },
+  {
+    _id: 'dev8',
+    name: 'Data Structures & Algorithms',
+    category: 'concepts',
+    order: 64,
+    icon: Cpu,
+  },
+  {
+    _id: 'dev9',
+    name: 'Authentication & Authorization',
+    category: 'concepts',
+    order: 65,
+    icon: KeyRound,
+  },
+  {
+    _id: 'dev10',
+    name: 'Full-Stack AI Development',
+    category: 'concepts',
+    order: 66,
+    icon: BrainCircuit,
+  },
 
-  // AI Engineering Workflow
-  { _id: 'wf1', name: 'Cursor', category: 'workflow', order: 74, icon: FileCode },
-  { _id: 'wf2', name: 'Claude', category: 'workflow', order: 75, icon: MessageSquare },
-  { _id: 'wf3', name: 'ChatGPT', category: 'workflow', order: 76, icon: Bot },
-  { _id: 'wf4', name: 'TRAE AI Agent', category: 'workflow', order: 77, icon: Bot },
-  { _id: 'wf5', name: 'Qoder', category: 'workflow', order: 78, icon: FileCode },
-  { _id: 'wf6', name: 'Prompt Engineering', category: 'workflow', order: 79, icon: Sparkles },
-  { _id: 'wf7', name: 'Context Engineering', category: 'workflow', order: 80, icon: Network },
-  { _id: 'wf8', name: 'LLM Debugging', category: 'workflow', order: 81, icon: Bug },
-  { _id: 'wf9', name: 'Agentic Workflows', category: 'workflow', order: 82, icon: Workflow },
+  // =========================================================
+  // AI Engineering
+  // =========================================================
+  {
+    _id: 'aieng1',
+    name: 'Cursor',
+    category: 'aiEngineering',
+    order: 67,
+    icon: FileCode,
+  },
+  {
+    _id: 'aieng2',
+    name: 'Claude',
+    category: 'aiEngineering',
+    order: 68,
+    icon: MessageSquare,
+  },
+  {
+    _id: 'aieng3',
+    name: 'ChatGPT',
+    category: 'aiEngineering',
+    order: 69,
+    icon: Bot,
+  },
+  {
+    _id: 'aieng4',
+    name: 'TRAE AI Agent',
+    category: 'aiEngineering',
+    order: 70,
+    icon: Bot,
+  },
+  {
+    _id: 'aieng5',
+    name: 'Qoder',
+    category: 'aiEngineering',
+    order: 71,
+    icon: FileCode,
+  },
+  {
+    _id: 'aieng6',
+    name: 'Prompt Engineering',
+    category: 'aiEngineering',
+    order: 72,
+    icon: Sparkles,
+  },
+  {
+    _id: 'aieng7',
+    name: 'Context Engineering',
+    category: 'aiEngineering',
+    order: 73,
+    icon: Network,
+  },
+  {
+    _id: 'aieng8',
+    name: 'LLM Debugging',
+    category: 'aiEngineering',
+    order: 74,
+    icon: Bug,
+  },
 ]
 
 const CATEGORY_LABELS: Record<SkillCategory, string> = {
   languages: 'Languages',
-  ai: 'AI, ML & Research',
+  machineLearning: 'Machine Learning',
+  deepLearning: 'Deep Learning & Computer Vision',
+  generativeAI: 'Generative AI & Information Retrieval',
   frameworks: 'Frameworks & Libraries',
   database: 'Databases & Infrastructure',
   concepts: 'Developer Tools & Concepts',
-  workflow: 'AI Engineering Workflow',
+  aiEngineering: 'AI Engineering',
 }
 
 const CATEGORY_COLORS: Record<
   SkillCategory,
-  { text: string; border: string; bg: string; glow: string }
+  {
+    text: string
+    border: string
+    bg: string
+    glow: string
+  }
 > = {
   languages: {
     text: 'text-cyan-600 dark:text-cyan-400',
@@ -186,31 +655,50 @@ const CATEGORY_COLORS: Record<
     bg: 'bg-cyan-500/10',
     glow: 'hover:shadow-cyan-500/10',
   },
-  ai: {
+
+  machineLearning: {
+    text: 'text-blue-600 dark:text-blue-400',
+    border: 'border-blue-500/20',
+    bg: 'bg-blue-500/10',
+    glow: 'hover:shadow-blue-500/10',
+  },
+
+  deepLearning: {
+    text: 'text-indigo-600 dark:text-indigo-400',
+    border: 'border-indigo-500/20',
+    bg: 'bg-indigo-500/10',
+    glow: 'hover:shadow-indigo-500/10',
+  },
+
+  generativeAI: {
     text: 'text-purple-600 dark:text-purple-400',
     border: 'border-purple-500/20',
     bg: 'bg-purple-500/10',
     glow: 'hover:shadow-purple-500/10',
   },
+
   frameworks: {
     text: 'text-violet-600 dark:text-violet-400',
     border: 'border-violet-500/20',
     bg: 'bg-violet-500/10',
     glow: 'hover:shadow-violet-500/10',
   },
+
   database: {
     text: 'text-orange-600 dark:text-orange-400',
     border: 'border-orange-500/20',
     bg: 'bg-orange-500/10',
     glow: 'hover:shadow-orange-500/10',
   },
+
   concepts: {
     text: 'text-green-600 dark:text-green-400',
     border: 'border-green-500/20',
     bg: 'bg-green-500/10',
     glow: 'hover:shadow-green-500/10',
   },
-  workflow: {
+
+  aiEngineering: {
     text: 'text-pink-600 dark:text-pink-400',
     border: 'border-pink-500/20',
     bg: 'bg-pink-500/10',
@@ -219,29 +707,56 @@ const CATEGORY_COLORS: Record<
 }
 
 const CATEGORIES = [
+  'generativeAI',
+  'machineLearning',
+  'deepLearning',
   'languages',
-  'ai',
   'frameworks',
   'database',
   'concepts',
-  'workflow',
+  'aiEngineering',
   'all',
 ] as const
 
 type Category = (typeof CATEGORIES)[number]
 
-function SkillCard({ skill, index }: { skill: SkillItem; index: number }) {
+const GROUPED_CATEGORY_ORDER: SkillCategory[] = [
+  'generativeAI',
+  'machineLearning',
+  'deepLearning',
+  'languages',
+  'frameworks',
+  'database',
+  'concepts',
+  'aiEngineering',
+]
+
+function SkillCard({
+  skill,
+  index,
+}: {
+  skill: SkillItem
+  index: number
+}) {
   const colors = CATEGORY_COLORS[skill.category]
   const Icon = skill.icon
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.85, y: 20 }}
-      whileInView={{ opacity: 1, scale: 1, y: 0 }}
+      initial={{
+        opacity: 0,
+        scale: 0.85,
+        y: 20,
+      }}
+      whileInView={{
+        opacity: 1,
+        scale: 1,
+        y: 0,
+      }}
       viewport={{ once: true }}
       transition={{
         duration: 0.45,
-        delay: index * 0.025,
+        delay: Math.min(index * 0.025, 0.3),
         ease: [0.22, 1, 0.36, 1],
       }}
       className={`glass rounded-2xl p-5 flex flex-col items-center justify-center text-center border ${colors.border} hover:scale-[1.04] hover:shadow-lg ${colors.glow} transition-all min-h-[130px] group`}
@@ -249,7 +764,10 @@ function SkillCard({ skill, index }: { skill: SkillItem; index: number }) {
       <div
         className={`w-14 h-14 rounded-2xl ${colors.bg} ${colors.border} border flex items-center justify-center mb-3 group-hover:scale-110 transition-transform`}
       >
-        <Icon size={28} className={colors.text} />
+        <Icon
+          size={28}
+          className={colors.text}
+        />
       </div>
 
       <p className="text-slate-800 dark:text-slate-100 text-sm font-semibold leading-snug">
@@ -260,83 +778,124 @@ function SkillCard({ skill, index }: { skill: SkillItem; index: number }) {
 }
 
 export default function Skills() {
-  const [activeCategory, setActiveCategory] = useState<Category>('ai')
+  const [activeCategory, setActiveCategory] =
+    useState<Category>('generativeAI')
 
   const filtered =
     activeCategory === 'all'
       ? SKILLS
-      : SKILLS.filter((skill) => skill.category === activeCategory)
+      : SKILLS.filter(
+          (skill) => skill.category === activeCategory
+        )
 
-  const groupedSkills = (
-    [
-      'languages',
-      'ai',
-      'frameworks',
-      'database',
-      'concepts',
-      'workflow',
-    ] as SkillCategory[]
-  ).reduce<Record<SkillCategory, SkillItem[]>>((acc, category) => {
-    acc[category] = SKILLS.filter((skill) => skill.category === category)
-    return acc
-  }, {} as Record<SkillCategory, SkillItem[]>)
+  const groupedSkills = GROUPED_CATEGORY_ORDER.reduce<
+    Record<SkillCategory, SkillItem[]>
+  >(
+    (acc, category) => {
+      acc[category] = SKILLS.filter(
+        (skill) => skill.category === category
+      )
+
+      return acc
+    },
+    {} as Record<SkillCategory, SkillItem[]>
+  )
 
   return (
-    <section id="skills" className="section-padding container-wide">
+    <section
+      id="skills"
+      className="section-padding container-wide"
+    >
       <SectionHeader
         label="06 / Skills"
         title="Technical Skills"
-        subtitle="A category-wise view of my AI engineering, machine learning, computer vision, research, full-stack development, database, and developer workflow toolkit."
+        subtitle="Technologies and engineering practices I use to build production AI systems, from retrieval and machine learning pipelines to full-stack applications and infrastructure."
       />
 
       <div className="flex flex-wrap justify-center gap-2 mb-12">
         {CATEGORIES.map((category) => (
           <button
             key={category}
-            onClick={() => setActiveCategory(category)}
-            className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all hover:scale-105 ${
+            onClick={() =>
+              setActiveCategory(category)
+            }
+            className={`px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-all hover:scale-105 ${
               activeCategory === category
                 ? 'bg-gradient-to-r from-cyan-500 to-purple-600 text-white shadow-lg shadow-cyan-500/20'
                 : 'glass text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white border border-black/5 dark:border-white/5'
             }`}
           >
-            {category === 'all' ? 'All' : CATEGORY_LABELS[category]}
+            {category === 'all'
+              ? 'All'
+              : CATEGORY_LABELS[category]}
           </button>
         ))}
       </div>
 
       {activeCategory === 'all' ? (
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {Object.entries(groupedSkills).map(
-            ([category, skills], groupIndex) => {
-              const cat = category as SkillCategory
-              const colors = CATEGORY_COLORS[cat]
+        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
+          {GROUPED_CATEGORY_ORDER.map(
+            (category, groupIndex) => {
+              const skills = groupedSkills[category]
+              const colors =
+                CATEGORY_COLORS[category]
 
               return (
                 <motion.div
                   key={category}
-                  initial={{ opacity: 0, scale: 0.85, y: 30 }}
-                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                  initial={{
+                    opacity: 0,
+                    scale: 0.9,
+                    y: 25,
+                  }}
+                  whileInView={{
+                    opacity: 1,
+                    scale: 1,
+                    y: 0,
+                  }}
                   viewport={{ once: true }}
                   transition={{
-                    duration: 0.6,
-                    delay: groupIndex * 0.08,
-                    ease: [0.22, 1, 0.36, 1],
+                    duration: 0.55,
+                    delay:
+                      groupIndex * 0.06,
+                    ease: [
+                      0.22,
+                      1,
+                      0.36,
+                      1,
+                    ],
                   }}
-                  className="glass rounded-2xl p-6 border border-black/5 dark:border-white/5 hover:scale-[1.02] transition-transform"
+                  className="glass rounded-2xl p-6 border border-black/5 dark:border-white/5 hover:border-cyan-500/15 transition-all"
                 >
-                  <h3 className={`font-semibold text-sm mb-5 ${colors.text}`}>
-                    {CATEGORY_LABELS[cat]}
-                  </h3>
+                  <div className="flex items-center justify-between gap-4 mb-5">
+                    <h3
+                      className={`font-semibold text-sm ${colors.text}`}
+                    >
+                      {
+                        CATEGORY_LABELS[
+                          category
+                        ]
+                      }
+                    </h3>
+
+                    <span className="text-[11px] font-mono text-slate-400">
+                      {skills.length}{' '}
+                      {skills.length === 1
+                        ? 'skill'
+                        : 'skills'}
+                    </span>
+                  </div>
 
                   <div className="grid grid-cols-2 gap-3">
-                    {skills.map((skill, index) => (
-                      <SkillCard
-                        key={skill._id}
-                        skill={skill}
-                        index={index}
-                      />
-                    ))}
+                    {skills.map(
+                      (skill, index) => (
+                        <SkillCard
+                          key={skill._id}
+                          skill={skill}
+                          index={index}
+                        />
+                      )
+                    )}
                   </div>
                 </motion.div>
               )
@@ -346,15 +905,32 @@ export default function Skills() {
       ) : (
         <motion.div
           key={activeCategory}
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          initial={{
+            opacity: 0,
+            scale: 0.96,
+            y: 10,
+          }}
+          animate={{
+            opacity: 1,
+            scale: 1,
+            y: 0,
+          }}
+          transition={{
+            duration: 0.4,
+            ease: [0.22, 1, 0.36, 1],
+          }}
           className="max-w-6xl mx-auto"
         >
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5">
-            {filtered.map((skill, index) => (
-              <SkillCard key={skill._id} skill={skill} index={index} />
-            ))}
+            {filtered.map(
+              (skill, index) => (
+                <SkillCard
+                  key={skill._id}
+                  skill={skill}
+                  index={index}
+                />
+              )
+            )}
           </div>
         </motion.div>
       )}
