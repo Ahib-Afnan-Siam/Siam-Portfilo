@@ -14,12 +14,10 @@ import AnimatedHeroLeftBackground from '@/components/ui/AnimatedHeroLeftBackgrou
 
 const ROLES = [
   'AI Software Engineer',
+  'Software Engineer',
   'Machine Learning Engineer',
-  'LLM Engineer',
-  'RAG Engineer',
-  'NL2SQL Developer',
-  'Computer Vision Engineer',
-  'Full-Stack AI Developer',
+  'Backend Engineer',
+  'Applied AI Engineer',
 ]
 
 export default function Hero() {
