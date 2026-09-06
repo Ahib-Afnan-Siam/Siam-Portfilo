@@ -3,9 +3,10 @@
 import { useRef, useMemo } from 'react'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
+import type { MousePosition } from '@/types'
 
 interface Props {
-  mouseNorm: { x: number; y: number }
+  mouseNorm: { current: MousePosition }
   count?: number
 }
 
@@ -65,8 +66,8 @@ export default function ParticleField({ mouseNorm, count }: Props) {
     pointsRef.current.rotation.x = time * 0.015
 
     // Mouse influence — adds to the base rotation
-    pointsRef.current.rotation.y += mouseNorm.x * 0.05
-    pointsRef.current.rotation.x -= mouseNorm.y * 0.03
+    pointsRef.current.rotation.y += mouseNorm.current.x * 0.05
+    pointsRef.current.rotation.x -= mouseNorm.current.y * 0.03
   })
 
   return (

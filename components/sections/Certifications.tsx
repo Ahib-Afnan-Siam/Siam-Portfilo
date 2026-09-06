@@ -4,93 +4,13 @@ import { motion } from 'framer-motion'
 import { ExternalLink } from 'lucide-react'
 import SectionHeader from '@/components/ui/SectionHeader'
 
-interface Certification {
-  id: string
-  name: string
-  issuer: string
-  date: string
-  description: string
-  credential?: string
-  credentialText?: string
-  credentialId?: string
-  color: 'blue' | 'orange' | 'green' | 'purple' | 'cyan' | 'gold'
-  specialBg?: 'mission' | 'ielts'
-}
+import { CERTS, type Certification } from '@/data/certifications'
 
-const CERTS: Certification[] = [
-  {
-    id: '1',
-    name: 'Mission OZ 2022 — Top 5 Worldwide',
-    issuer: 'Space Teams · STEMX 365',
-    date: '2022',
-    description:
-      'Ranked among the Top 5 worldwide and completed a space science and engineering program covering planetary science, spacecraft design, orbital mechanics, remote sensing, entry-descent-landing, extraterrestrial habitats, and human-robotic exploration. Certificate signed by NASA astronaut and aerospace engineering professor Gregory Chamitoff, Ph.D.',
-    credential:
-      'https://drive.google.com/file/d/1lkfS9niXuzvHIO6h3YNKETxFuZ3J0Csl/view?usp=sharing',
-    credentialText: 'View Credential',
-    color: 'purple',
-    specialBg: 'mission',
-  },
-  {
-    id: '2',
-    name: 'IELTS Academic — Overall Band 7.5',
-    issuer: 'British Council / IDP / Cambridge English',
-    date: 'Band 7.5',
-    description:
-      'Demonstrated strong English communication proficiency across listening, reading, writing, and speaking, supporting professional collaboration, documentation, research writing, and global communication.',
-    credentialText: 'Certificate available upon request',
-    color: 'cyan',
-    specialBg: 'ielts',
-  },
-  {
-    id: '3',
-    name: 'Certificate of Accomplishment in Software Engineer',
-    issuer: 'HackerRank',
-    date: 'Oct 2024',
-    credentialId: 'CF5B58274C39',
-    description:
-      'Validated practical software engineering skills across problem-solving, Python, SQL, and REST API development, demonstrating readiness for backend and full-stack engineering workflows.',
-    credential: 'https://www.hackerrank.com/certificates/iframe/cf5b58274c39',
-    credentialText: 'View Credential',
-    color: 'green',
-  },
-  {
-    id: '4',
-    name: 'Certificate of Accomplishment in Software Engineer Intern',
-    issuer: 'HackerRank',
-    date: 'Oct 2024',
-    credentialId: '6C57FAE14D09',
-    description:
-      'Certified foundational software engineering ability with focus on problem solving, Python, and SQL — covering core programming and database concepts required for technical roles.',
-    credential: 'https://www.hackerrank.com/certificates/iframe/6c57fae14d09',
-    credentialText: 'View Credential',
-    color: 'green',
-  },
-  {
-    id: '5',
-    name: 'Certificate of Accomplishment in Python (Basic)',
-    issuer: 'HackerRank',
-    date: 'Oct 2024',
-    credentialId: '6AC36B44D0F0',
-    description:
-      'Demonstrated Python fundamentals including scalar types, operators, control flow, strings, collections, iteration, modularity, objects, types, and classes.',
-    credential: 'https://www.hackerrank.com/certificates/iframe/6ac36b44d0f0',
-    credentialText: 'View Credential',
-    color: 'blue',
-  },
-  {
-    id: '6',
-    name: 'Certificate of Accomplishment in Problem Solving (Basic)',
-    issuer: 'HackerRank',
-    date: 'Mar 2024',
-    credentialId: 'AF4F6EACE87F',
-    description:
-      'Validated foundational algorithmic problem-solving skills, including essential data structures such as arrays and strings, along with core algorithms like sorting and searching.',
-    credential: 'https://www.hackerrank.com/certificates/iframe/af4f6eace87f',
-    credentialText: 'View Credential',
-    color: 'orange',
-  },
-]
+type SectionVariant = 'featured' | 'full'
+
+type CertificationsProps = {
+  variant?: SectionVariant
+}
 
 const COLOR_MAP = {
   blue: {
@@ -144,17 +64,26 @@ const SPECIAL_BG_MAP = {
   },
 }
 
-export default function Certifications() {
+export default function Certifications({ variant = 'full' }: CertificationsProps) {
+  const visibleCerts =
+    variant === 'featured'
+      ? CERTS.filter((cert) => cert.featured)
+      : CERTS
+
   return (
     <section id="certifications" className="section-padding container-wide">
       <SectionHeader
         label="07 / Certifications"
         title="Certifications & Achievements"
-        subtitle="Credentials and achievements that validate my foundation in software engineering, Python, SQL, problem solving, English communication, and space science."
+        subtitle={
+          variant === 'featured'
+            ? 'Selected credentials spanning engineering, communication, and space science.'
+            : 'Credentials and achievements that validate my foundation in software engineering, Python, SQL, problem solving, English communication, and space science.'
+        }
       />
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        {CERTS.map((cert, i) => {
+        {visibleCerts.map((cert, i) => {
           const c = COLOR_MAP[cert.color]
           const special = cert.specialBg
             ? SPECIAL_BG_MAP[cert.specialBg]
@@ -264,6 +193,17 @@ export default function Certifications() {
           )
         })}
       </div>
+
+      {variant === 'featured' && (
+        <div className="flex justify-center mt-10">
+          <a
+            href="/certifications"
+            className="px-5 py-2.5 rounded-xl glass border border-black/5 dark:border-white/5 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 hover:border-cyan-500/30 transition-all"
+          >
+            View All Certifications
+          </a>
+        </div>
+      )}
     </section>
   )
 }

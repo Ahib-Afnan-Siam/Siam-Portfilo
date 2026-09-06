@@ -1,27 +1,34 @@
 'use client'
 
-import { Suspense, useRef } from 'react'
+import { Suspense, useRef, type ReactNode } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { AdaptiveDpr, AdaptiveEvents, Preload } from '@react-three/drei'
 import * as THREE from 'three'
 import ParticleField from './ParticleField'
 import FloatingObjects from './FloatingObjects'
 import { useMousePosition } from '@/hooks/useMousePosition'
+import type { MousePosition } from '@/types'
 
 /** Inner camera rig that subtly pans toward the cursor */
-function CameraRig({ normalised }: { normalised: { x: number; y: number } }) {
+function CameraRig({
+  children,
+  normalised,
+}: {
+  children: ReactNode
+  normalised: { current: MousePosition }
+}) {
   const rig = useRef<THREE.Group>(null)
 
   useFrame((state) => {
     if (!rig.current) return
     // Smooth damp toward mouse position
     rig.current.rotation.y +=
-      (normalised.x * 0.08 - rig.current.rotation.y) * 0.03
+      (normalised.current.x * 0.08 - rig.current.rotation.y) * 0.03
     rig.current.rotation.x +=
-      (-normalised.y * 0.05 - rig.current.rotation.x) * 0.03
+      (-normalised.current.y * 0.05 - rig.current.rotation.x) * 0.03
   })
 
-  return <group ref={rig} />
+  return <group ref={rig}>{children}</group>
 }
 
 interface SceneProps {
@@ -49,9 +56,10 @@ export default function Scene({ className = 'fixed inset-0 -z-10' }: SceneProps)
         <directionalLight position={[-10, -5, -5]} intensity={0.3} color="#a855f7" />
 
         <Suspense fallback={null}>
-          <CameraRig normalised={normalised} />
-          <ParticleField mouseNorm={normalised} />
-          <FloatingObjects mouseNorm={normalised} />
+          <CameraRig normalised={normalised}>
+            <ParticleField mouseNorm={normalised} />
+            <FloatingObjects mouseNorm={normalised} />
+          </CameraRig>
         </Suspense>
 
         <AdaptiveDpr pixelated />

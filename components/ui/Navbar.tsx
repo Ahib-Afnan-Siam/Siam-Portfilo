@@ -10,10 +10,10 @@ import ThemeToggle from './ThemeToggle'
 const navLinks = [
   { label: 'About', href: '/about', id: 'about' },
   { label: 'Experience', href: '/experience', id: 'experience' },
-  { label: 'Leadership', href: '/leadership', id: 'leadership' },
   { label: 'Projects', href: '/projects', id: 'projects' },
-  { label: 'Research', href: '/research', id: 'research' },
   { label: 'Skills', href: '/skills', id: 'skills' },
+  { label: 'Research', href: '/research', id: 'research' },
+  { label: 'Leadership', href: '/leadership', id: 'leadership' },
   { label: 'Certifications', href: '/certifications', id: 'certifications' },
   { label: 'Contact', href: '/contact', id: 'contact' },
 ]
@@ -72,7 +72,7 @@ export default function Navbar() {
         </a>
 
         {/* Desktop links — centered */}
-        <ul className="hidden md:flex items-center gap-6 lg:gap-8 absolute left-1/2 -translate-x-1/2">
+        <ul className="hidden xl:flex items-center gap-6 2xl:gap-8 absolute left-1/2 -translate-x-1/2">
           {navLinks.map((link) => (
             <li key={link.href}>
               <a
@@ -95,7 +95,7 @@ export default function Navbar() {
         </ul>
 
         {/* Desktop right controls */}
-        <div className="hidden md:flex items-center gap-6">
+        <div className="hidden xl:flex items-center gap-6">
           <ThemeToggle />
           <a
             href="/contact"
@@ -106,7 +106,7 @@ export default function Navbar() {
         </div>
 
         {/* Mobile row */}
-        <div className="md:hidden flex items-center gap-2">
+        <div className="xl:hidden flex items-center gap-2">
           <ThemeToggle />
           <button
             onClick={() => setMobileOpen((v) => !v)}
@@ -124,7 +124,7 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden border-t border-black/5 dark:border-white/5 bg-white/90 dark:bg-[#0a0a1f]/90 backdrop-blur-xl"
+            className="xl:hidden border-t border-black/5 dark:border-white/5 bg-white/90 dark:bg-[#0a0a1f]/90 backdrop-blur-xl"
           >
             <ul className="px-6 py-6 flex flex-col gap-4">
               {navLinks.map((link) => (
@@ -143,6 +143,15 @@ export default function Navbar() {
                   </a>
                 </li>
               ))}
+              <li className="pt-3 border-t border-black/5 dark:border-white/5">
+                <a
+                  href="/contact"
+                  onClick={() => setMobileOpen(false)}
+                  className="flex items-center justify-center px-4 py-2.5 rounded-lg border border-cyan-500/40 text-cyan-600 dark:text-cyan-400 font-medium hover:bg-cyan-500/10 transition-colors"
+                >
+                  Let&apos;s Talk
+                </a>
+              </li>
             </ul>
           </motion.div>
         )}

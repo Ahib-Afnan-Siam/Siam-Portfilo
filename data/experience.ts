@@ -1,0 +1,96 @@
+import type { Experience } from '@/types'
+
+export const EXPERIENCES: Experience[] = [
+  {
+    _id: '1',
+    company: 'PRAN-RFL Group',
+    role: 'AI Software Engineer (Sub Assistant Manager) — MIS',
+    description:
+      'Building and deploying production-grade AI systems for enterprise analytics, recruitment intelligence, meeting automation, semantic search, and computer vision workflows used across real business environments.',
+    responsibilities: [
+      'Built Uttoron, a natural-language-to-SQL AI assistant using FastAPI, ChromaDB, Oracle, and LLM-driven query generation for enterprise reporting.',
+      'Designed schema-aware RAG pipelines enabling real-time SQL execution and analytics over 50M+ enterprise records.',
+      'Developed Hire360, a full-stack AI recruitment intelligence platform processing 10,000+ CVs with semantic candidate search, Oracle VECTOR retrieval, and MiniLM reranking.',
+      'Designed an explainable 0–100 hybrid candidate ranking system combining vector similarity and reranker scores, reducing manual screening effort by 60%.',
+      'Engineered MeetOS, an AI meeting agent for Google Meet and Microsoft Teams using Playwright and Whisper for auto-join, participant tracking, transcription, AI summaries, and PDF report generation.',
+      'Developed a real-time facial recognition attendance system using YOLOv8n-Face, MobileFaceNet, HRIS authentication, and live multi-camera monitoring dashboards.',
+    ],
+    technologies: [
+      'Python',
+      'FastAPI',
+      'React',
+      'ChromaDB',
+      'Oracle',
+      'Oracle VECTOR',
+      'Sentence Transformers',
+      'MiniLM',
+      'Playwright',
+      'Whisper',
+      'YOLOv8n-Face',
+      'MobileFaceNet',
+      'LLM APIs',
+      'Docker',
+    ],
+    startDate: '2025-11',
+    current: true,
+    order: 1,
+  },
+
+  {
+    _id: '2',
+    company: 'PRAN-RFL Group',
+    role: 'AI Software Engineer Intern — MIS',
+    description:
+      'Contributed to enterprise AI assistant development, focusing on schema-aware NL2SQL generation, RAG optimization, query validation, and on-premise deployment support.',
+    responsibilities: [
+      'Implemented schema-aware query generation and validation logic for an NL2SQL AI assistant, improving query accuracy and reliability.',
+      'Optimized RAG pipeline performance to reduce report generation time and improve system responsiveness.',
+      'Assisted in on-premise deployment and reliability improvements for internal enterprise AI workflows.',
+      'Worked with Oracle-backed enterprise data systems to make reporting and analytics more accessible to business users.',
+    ],
+    technologies: [
+      'Python',
+      'FastAPI',
+      'Oracle',
+      'ChromaDB',
+      'RAG',
+      'NL2SQL',
+      'Sentence Transformers',
+      'LLM APIs',
+      'React',
+    ],
+    startDate: '2025-06',
+    endDate: '2025-11',
+    current: false,
+    order: 2,
+  },
+
+  {
+    _id: '3',
+    company: 'Universe IT Institute (UITI)',
+    role: 'Full Stack Engineer Intern',
+    description:
+      'Developed AI-powered and full-stack web applications, working across backend APIs, frontend interfaces, ML-powered features, and scalable application workflows.',
+    responsibilities: [
+      'Built full-stack web applications using Python, FastAPI, React, Next.js, Node.js, and PHP.',
+      'Developed and integrated REST APIs connecting frontend interfaces with backend services.',
+      'Implemented ML-powered features and frontend-backend functionalities for scalable web applications.',
+      'Worked across application logic, API integration, and UI implementation to deliver complete web solutions.',
+    ],
+    technologies: [
+      'Python',
+      'FastAPI',
+      'React',
+      'Next.js',
+      'Node.js',
+      'PHP',
+      'REST APIs',
+      'JavaScript',
+      'MySQL',
+    ],
+    startDate: '2024-12',
+    endDate: '2025-05',
+    current: false,
+    order: 3,
+  },
+]

@@ -14,11 +14,11 @@ export default function HomePage() {
       <Hero />
       <About />
       <Experience />
+      <Projects variant="featured" />
       <Skills />
-      <Projects />
-      <Research />
-      <Leadership />
-      <Certifications />
+      <Research variant="featured" />
+      <Leadership variant="featured" />
+      <Certifications variant="featured" />
       <Contact />
     </main>
   )

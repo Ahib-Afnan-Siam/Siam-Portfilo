@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export default function LeadershipPage() {
   return (
     <main className="min-h-screen pt-24 md:pt-28">
-      <Leadership />
+      <Leadership variant="full" />
     </main>
   )
 }

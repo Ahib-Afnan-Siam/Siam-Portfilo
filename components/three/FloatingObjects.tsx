@@ -1,11 +1,12 @@
 'use client'
 
-import { useRef } from 'react'
+import { useMemo, useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
+import type { MousePosition } from '@/types'
 
 interface Props {
-  mouseNorm: { x: number; y: number }
+  mouseNorm: { current: MousePosition }
 }
 
 /** A single wireframe mesh that floats and rotates */
@@ -20,7 +21,7 @@ function WireShape({
   position: [number, number, number]
   color: string
   speed?: number
-  mouseNorm: { x: number; y: number }
+  mouseNorm: { current: MousePosition }
 }) {
   const meshRef = useRef<THREE.Mesh>(null)
   const basePos = useRef(new THREE.Vector3(...position))
@@ -41,8 +42,8 @@ function WireShape({
     meshRef.current.rotation.z = t * speed * 0.1
 
     // Subtle mouse tilt
-    meshRef.current.rotation.x += mouseNorm.y * 0.1
-    meshRef.current.rotation.y += mouseNorm.x * 0.1
+    meshRef.current.rotation.x += mouseNorm.current.y * 0.1
+    meshRef.current.rotation.y += mouseNorm.current.x * 0.1
   })
 
   return (
@@ -56,12 +57,13 @@ function WireShape({
  * Several floating wireframe shapes scattered around the background scene.
  */
 export default function FloatingObjects({ mouseNorm }: Props) {
-  // Geometries are stable references (created once)
-  const torus = new THREE.TorusGeometry(0.8, 0.25, 16, 60)
-  const icosa = new THREE.IcosahedronGeometry(0.7, 1)
-  const octa = new THREE.OctahedronGeometry(0.6, 0)
-  const tetra = new THREE.TetrahedronGeometry(0.7, 0)
-  const torusKnot = new THREE.TorusKnotGeometry(0.5, 0.15, 80, 12)
+  const { torus, icosa, octa, tetra, torusKnot } = useMemo(() => ({
+    torus: new THREE.TorusGeometry(0.8, 0.25, 16, 60),
+    icosa: new THREE.IcosahedronGeometry(0.7, 1),
+    octa: new THREE.OctahedronGeometry(0.6, 0),
+    tetra: new THREE.TetrahedronGeometry(0.7, 0),
+    torusKnot: new THREE.TorusKnotGeometry(0.5, 0.15, 80, 12),
+  }), [])
 
   return (
     <group>

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import type { MousePosition } from '@/types'
 
 /**
@@ -8,16 +8,15 @@ import type { MousePosition } from '@/types'
  * Returns normalized coordinates (x, y) as well as raw pixel values.
  */
 export function useMousePosition() {
-  const [position, setPosition] = useState<MousePosition>({ x: 0, y: 0 })
-  const [normalised, setNormalised] = useState<MousePosition>({ x: 0, y: 0 })
+  const position = useRef<MousePosition>({ x: 0, y: 0 })
+  const normalised = useRef<MousePosition>({ x: 0, y: 0 })
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      setPosition({ x: e.clientX, y: e.clientY })
-      setNormalised({
-        x: (e.clientX / window.innerWidth) * 2 - 1,
-        y: -((e.clientY / window.innerHeight) * 2 - 1),
-      })
+      position.current.x = e.clientX
+      position.current.y = e.clientY
+      normalised.current.x = (e.clientX / window.innerWidth) * 2 - 1
+      normalised.current.y = -((e.clientY / window.innerHeight) * 2 - 1)
     }
 
     window.addEventListener('mousemove', handleMouseMove)

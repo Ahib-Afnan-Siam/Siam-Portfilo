@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export default function ResearchPage() {
   return (
     <main className="min-h-screen pt-24 md:pt-28">
-      <Research />
+      <Research variant="full" />
     </main>
   )
 }

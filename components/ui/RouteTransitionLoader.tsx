@@ -8,8 +8,8 @@ import Lottie from 'lottie-react'
 import loadingHandAnimation from '../../assets/lottie/loading-hand.json'
 import walkingShoesAnimation from '../../assets/lottie/walk-cycling-shoes.json'
 
-const TRANSITION_DELAY = 850
-const HIDE_DELAY = 450
+const TRANSITION_DELAY = 350
+const HIDE_DELAY = 250
 
 const animations = [
   {
@@ -50,6 +50,7 @@ export default function RouteTransitionLoader() {
       const downloadAttr = anchor.getAttribute('download')
 
       if (!href) return
+      if (href.startsWith('#')) return
       if (downloadAttr) return
       if (targetAttr === '_blank') return
       if (href.startsWith('mailto:')) return
@@ -63,12 +64,14 @@ export default function RouteTransitionLoader() {
 
       if (nextUrl.origin !== window.location.origin) return
 
-      const currentFullPath =
-        window.location.pathname + window.location.search + window.location.hash
+      const currentUrl = new URL(window.location.href)
+      const isSamePage =
+        nextUrl.pathname === currentUrl.pathname &&
+        nextUrl.search === currentUrl.search
 
-      const nextFullPath = nextUrl.pathname + nextUrl.search + nextUrl.hash
+      if (isSamePage) return
 
-      if (currentFullPath === nextFullPath) return
+      const nextPath = nextUrl.pathname + nextUrl.search + nextUrl.hash
 
       event.preventDefault()
 
@@ -79,25 +82,7 @@ export default function RouteTransitionLoader() {
       setIsVisible(true)
 
       showTimerRef.current = setTimeout(() => {
-        const isSamePageHashNavigation =
-          nextUrl.pathname === window.location.pathname &&
-          nextUrl.search === window.location.search &&
-          nextUrl.hash
-
-        if (isSamePageHashNavigation) {
-          window.history.pushState(null, '', nextUrl.hash)
-
-          const section = document.querySelector(nextUrl.hash)
-
-          if (section) {
-            section.scrollIntoView({
-              behavior: 'smooth',
-              block: 'start',
-            })
-          }
-        } else {
-          router.push(nextFullPath)
-        }
+        router.push(nextPath)
 
         hideTimerRef.current = setTimeout(() => {
           setIsVisible(false)
