@@ -73,7 +73,7 @@ export default function Certifications({ variant = 'full' }: CertificationsProps
   return (
     <section id="certifications" className="section-padding container-wide">
       <SectionHeader
-        label="07 / Certifications"
+        label="08 / Certifications"
         title="Certifications & Achievements"
         subtitle={
           variant === 'featured'

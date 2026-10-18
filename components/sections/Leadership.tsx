@@ -24,8 +24,9 @@ export default function Leadership({ variant = 'full' }: LeadershipProps) {
   return (
     <section id="leadership" className="section-padding container-wide">
       <SectionHeader
-        label="06 / Leadership"
+        label="07 / Leadership"
         title="Leadership & Club Activities"
+        spacing={variant === 'full' ? 'compact' : 'default'}
         subtitle={
           variant === 'featured'
             ? 'Selected leadership roles across robotics and student technology communities.'

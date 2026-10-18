@@ -147,7 +147,11 @@ function SkillCard({
   )
 }
 
-export default function Skills() {
+type SkillsProps = {
+  variant?: 'featured' | 'full'
+}
+
+export default function Skills({ variant = 'featured' }: SkillsProps) {
   const [activeCategory, setActiveCategory] =
     useState<Category>('generativeAI')
 
@@ -177,8 +181,9 @@ export default function Skills() {
       className="section-padding container-wide"
     >
       <SectionHeader
-        label="04 / Skills"
+        label="05 / Skills"
         title="Technical Skills"
+        spacing={variant === 'full' ? 'compact' : 'default'}
         subtitle="Technologies and engineering practices I use to build production AI systems, from retrieval and machine learning pipelines to full-stack applications and infrastructure."
       />
 

@@ -64,7 +64,7 @@ export default function Contact() {
   return (
     <section id="contact" className="section-padding container-wide">
       <SectionHeader
-        label="08 / Contact"
+        label="09 / Contact"
         title="Get In Touch"
         subtitle="Have a project in mind, want to collaborate on AI research, or just want to say hi?"
       />

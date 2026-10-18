@@ -226,8 +226,9 @@ export default function Projects({ variant = 'full' }: ProjectsProps) {
       className="section-padding container-wide"
     >
       <SectionHeader
-        label="03 / Projects"
+        label="04 / Projects"
         title="Selected Work"
+        spacing={variant === 'full' ? 'compact' : 'default'}
         subtitle={
           variant === 'featured'
             ? 'Selected production AI systems and enterprise projects.'

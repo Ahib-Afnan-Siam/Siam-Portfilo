@@ -109,7 +109,7 @@ export default function Research({ variant = 'full' }: ResearchProps) {
   return (
     <section id="research" className="section-padding container-wide">
       <SectionHeader
-        label="05 / Research & Blogs"
+        label="06 / Research & Blogs"
         title="Research & Blogs"
         subtitle={
           variant === 'featured'

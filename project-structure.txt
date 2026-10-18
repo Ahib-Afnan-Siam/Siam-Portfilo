@@ -1,0 +1,136 @@
+Portfolio Project Structure
+=========================
+
+Source project structure (excluding generated folders such as .git, .next, and node_modules):
+
+Portfolio-main/
+├── .env.example
+├── .env.local
+├── .gitignore
+├── README.md
+├── next-env.d.ts
+├── next.config.mjs
+├── package-lock.json
+├── package.json
+├── postcss.config.mjs
+├── project-structure.txt
+├── tailwind.config.ts
+├── tsconfig.json
+├── app/
+│   ├── apple-icon.tsx
+│   ├── globals.css
+│   ├── icon.tsx
+│   ├── layout.tsx
+│   ├── manifest.ts
+│   ├── opengraph-image.tsx
+│   ├── robots.ts
+│   ├── sitemap.ts
+│   ├── twitter-image.tsx
+│   ├── (site)/
+│   │   ├── layout.tsx
+│   │   ├── page.tsx
+│   │   ├── about/
+│   │   │   └── page.tsx
+│   │   ├── certifications/
+│   │   │   └── page.tsx
+│   │   ├── contact/
+│   │   │   └── page.tsx
+│   │   ├── experience/
+│   │   │   └── page.tsx
+│   │   ├── leadership/
+│   │   │   └── page.tsx
+│   │   ├── projects/
+│   │   │   └── page.tsx
+│   │   ├── research/
+│   │   │   └── page.tsx
+│   │   ├── skills/
+│   │   │   └── page.tsx
+│   │   └── testimonials/
+│   │       ├── [id]/
+│   │       │   └── page.tsx
+│   │       └── page.tsx
+│   ├── admin/
+│   │   ├── AdminDashboard.tsx
+│   │   ├── page.tsx
+│   │   └── login/
+│   │       └── page.tsx
+│   └── api/
+│       ├── admin/
+│       │   ├── login/
+│       │   │   └── route.ts
+│       │   └── logout/
+│       │       └── route.ts
+│       └── contact/
+│           └── route.ts
+├── assets/
+│   ├── images/
+│   │   ├── Drishti.png
+│   │   ├── Recruitement.jpeg
+│   │   ├── Uttoron 1-01.png
+│   │   ├── aluminum_defect.png
+│   │   ├── car.png
+│   │   ├── facebook.png
+│   │   ├── football.png
+│   │   └── meetos.png
+│   └── lottie/
+│       ├── loading-hand.json
+│       ├── man-robot-workplace.json
+│       ├── walk-cycling-shoes.json
+│       └── work from home.json
+├── components/
+│   ├── Providers.tsx
+│   ├── sections/
+│   │   ├── About.tsx
+│   │   ├── Certifications.tsx
+│   │   ├── Contact.tsx
+│   │   ├── Experience.tsx
+│   │   ├── Hero.tsx
+│   │   ├── Leadership.tsx
+│   │   ├── Projects.tsx
+│   │   ├── Research.tsx
+│   │   ├── Skills.tsx
+│   │   └── Testimonials.tsx
+│   ├── testimonials/
+│   │   ├── TestimonialAuthor.tsx
+│   │   ├── TestimonialCard.tsx
+│   │   ├── TestimonialCarousel.tsx
+│   │   ├── TestimonialDetail.tsx
+│   │   └── TestimonialGrid.tsx
+│   ├── three/
+│   │   ├── FloatingObjects.tsx
+│   │   ├── ParticleField.tsx
+│   │   └── Scene.tsx
+│   └── ui/
+│       ├── AnimatedHeroBackground.tsx
+│       ├── AnimatedHeroLeftBackground.tsx
+│       ├── CursorGlow.tsx
+│       ├── Footer.tsx
+│       ├── Navbar.tsx
+│       ├── RouteTransitionLoader.tsx
+│       ├── ScrollToTop.tsx
+│       ├── SectionHeader.tsx
+│       └── ThemeToggle.tsx
+├── data/
+│   ├── certifications.ts
+│   ├── experience.ts
+│   ├── leadership.ts
+│   ├── projects.ts
+│   ├── research.ts
+│   ├── skills.ts
+│   └── testimonials.ts
+├── doc/
+│   ├── changes.log
+│   └── portfolio-rating_2026-06-13_18-41.txt
+├── hooks/
+│   └── useMousePosition.ts
+├── lib/
+│   ├── auth.ts
+│   └── site.ts
+├── public/
+│   ├── Ahib_Afnan_CV.pdf
+│   ├── images/
+│   │   └── testimonials/
+│   │       └── sayem-biswas.jpeg
+│   └── portfolio-preview.png
+└── types/
+    └── index.ts
