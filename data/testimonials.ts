@@ -56,6 +56,40 @@ export const TESTIMONIALS: Testimonial[] = [
     featured: true,
     displayOrder: 1,
   },
+  {
+    id: 'zakir-hossen-2026-10-25',
+    name: 'Zakir Hossen',
+    role: 'Senior Oracle Apps DBA · OCI Architect · AI Team Lead · PRAN-RFL Group',
+    relationship: 'Direct Manager / Team Leader',
+    date: '2026-10-25',
+    source: 'LinkedIn',
+
+    profileUrl:
+      'https://www.linkedin.com/in/zakir-hossen-8243ba11b/?isSelfProfile=false',
+
+    recommendationUrl:
+      'https://www.linkedin.com/in/ahib-afnan-siam/details/recommendations/',
+
+    avatarUrl: '/images/testimonials/zakir-hossen.jpeg',
+    
+    headline: 'Adaptability. Innovation. Business-focused AI.',
+
+    featuredQuote:
+      'What sets Ahib apart is his ability to quickly learn emerging technologies and transform complex technical challenges into intelligent, practical, and business-focused AI solutions.',
+
+    paragraphs: [
+      'I’m pleased to work with Ahib Afnan Siam at PRAN-RFL Group. He is a talented, dedicated, and quick-learning AI Engineer with strong expertise in Machine Learning, LLMs, RAG, NL2SQL, Computer Vision, Python, FastAPI, and React.',
+
+      'What sets Ahib apart is his ability to quickly learn emerging technologies and transform complex technical challenges into intelligent, practical, and business-focused AI solutions. He actively contributes to innovative AI-powered projects at PRAN-RFL Group, demonstrating strong analytical thinking, technical versatility, and a genuine passion for Artificial Intelligence.',
+
+      'As a team leader, I value his dedication, adaptability, problem-solving skills, and commitment to continuous learning. He is a valuable member of our team, and I highly recommend him as a capable AI Engineer with a strong innovative mindset and the potential to make a meaningful impact in the AI industry.',
+    ],
+
+    themes: ['AI Engineering', 'Adaptability', 'Problem Solving'],
+
+    featured: true,
+    displayOrder: 2,
+  },
 ]
 
 // Use lower numbers first. Entries without displayOrder keep their array order.

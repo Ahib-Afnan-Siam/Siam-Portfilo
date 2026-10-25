@@ -6,38 +6,49 @@ import { ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react'
 import type { Testimonial } from '@/data/testimonials'
 import TestimonialCard from './TestimonialCard'
 
-const AUTOPLAY_MS = 9000
-const SLIDE_SECONDS = 0.8
+const AUTOPLAY_MS = 6000
+const SLIDE_SECONDS = 1.0
+const SLIDE_SPACING = 81
+const OFFSETS = [-2, -1, 0, 1, 2] as const
 
 type Props = {
   testimonials: Testimonial[]
 }
 
-/** Circular distance from the active slide, in the direction of travel. */
-function relativePosition(index: number, active: number, count: number, direction: number) {
-  if (index === active) return 0
-  if (count === 2) return direction > 0 ? 1 : -1
+function wrap(index: number, count: number) {
+  return ((index % count) + count) % count
+}
 
-  const forward = (index - active + count) % count
-  const backward = (active - index + count) % count
-  if (forward === backward) return direction > 0 ? 1 : -1
-  return forward < backward ? 1 : -1
+function visualState(position: number, reducedMotion: boolean) {
+  const center = Math.abs(position) < 0.01
+  const neighbor = Math.abs(position) <= 1.01
+
+  return {
+    x: `${position * SLIDE_SPACING}%`,
+    scale: reducedMotion || center ? 1 : 0.87,
+    opacity: center ? 1 : neighbor ? 0.48 : 0,
+    filter: reducedMotion || center
+      ? 'blur(0px) brightness(1) saturate(1)'
+      : 'blur(1.5px) brightness(0.9) saturate(0.85)',
+  }
 }
 
 export default function TestimonialCarousel({ testimonials }: Props) {
   const reducedMotion = useReducedMotion()
   const [active, setActive] = useState(0)
-  const [direction, setDirection] = useState(1)
+  const [direction, setDirection] = useState<1 | -1>(1)
+  const [moving, setMoving] = useState(false)
   const [paused, setPaused] = useState(false)
   const [hovered, setHovered] = useState(false)
   const [focused, setFocused] = useState(false)
   const [hidden, setHidden] = useState(false)
   const [resetKey, setResetKey] = useState(0)
   const touchX = useRef<number | null>(null)
+  const pendingIndex = useRef<number | null>(null)
+  const movingRef = useRef(false)
 
   const count = testimonials.length
-  const hasMultiple = count > 1
-  const safeActive = count ? ((active % count) + count) % count : 0
+  const safeActive = count ? wrap(active, count) : 0
 
   useEffect(() => {
     const update = () => setHidden(document.visibilityState !== 'visible')
@@ -46,28 +57,48 @@ export default function TestimonialCarousel({ testimonials }: Props) {
     return () => document.removeEventListener('visibilitychange', update)
   }, [])
 
-  const go = useCallback((next: number, dir: number) => {
-    if (count < 2) return
-    setDirection(dir)
-    setActive(((next % count) + count) % count)
-    setResetKey((key) => key + 1)
-  }, [count])
+  const go = useCallback((next: number, dir: 1 | -1) => {
+    if (count < 2 || movingRef.current) return
+    const destination = wrap(next, count)
+    if (destination === safeActive) return
 
-  const isAutoPaused = paused || hovered || focused || hidden || !!reducedMotion
+    pendingIndex.current = destination
+    movingRef.current = true
+    setDirection(dir)
+    setMoving(true)
+    setResetKey((key) => key + 1)
+  }, [count, safeActive])
+
+  const finish = useCallback(() => {
+    if (!movingRef.current) return
+    movingRef.current = false
+    if (pendingIndex.current !== null) setActive(pendingIndex.current)
+    pendingIndex.current = null
+    setMoving(false)
+  }, [])
+
+  // If motion is disabled, change the active card without a timed transition.
+  useEffect(() => {
+    if (moving && reducedMotion) finish()
+  }, [moving, reducedMotion, finish])
+
+  const autoPaused = paused || hovered || focused || hidden || !!reducedMotion
 
   useEffect(() => {
-    if (!hasMultiple || isAutoPaused) return
-    const timer = window.setInterval(() => {
-      setDirection(1)
-      setActive((previous) => (previous + 1) % count)
-    }, AUTOPLAY_MS)
-    return () => window.clearInterval(timer)
-  }, [count, hasMultiple, isAutoPaused, resetKey])
+    if (count < 2 || autoPaused || moving) return
+    const timer = window.setTimeout(() => go(safeActive + 1, 1), AUTOPLAY_MS)
+    return () => window.clearTimeout(timer)
+  }, [count, autoPaused, moving, safeActive, resetKey, go])
 
   if (!count) return null
-  if (!hasMultiple) {
+  if (count === 1) {
     return <TestimonialCard testimonial={testimonials[0]} variant="featured" />
   }
+
+  // With two entries, the same neighbor is deliberately shown at both edges.
+  // These are decorative preview instances, never duplicate recommendations.
+  const target = pendingIndex.current ?? wrap(safeActive + direction, count)
+  const incomingOffset = direction
 
   return (
     <div
@@ -88,53 +119,56 @@ export default function TestimonialCarousel({ testimonials }: Props) {
       }}
       onTouchEnd={(event) => {
         if (touchX.current === null) return
-        const distance = (event.changedTouches[0]?.clientX ?? touchX.current) - touchX.current
+        const endX = event.changedTouches[0]?.clientX ?? touchX.current
+        const distance = endX - touchX.current
         touchX.current = null
         if (Math.abs(distance) > 60) {
-          const dir = distance < 0 ? 1 : -1
+          const dir: 1 | -1 = distance < 0 ? 1 : -1
           go(safeActive + dir, dir)
         }
       }}
     >
-      {/* The grid keeps a consistent height; slides overlap in one grid cell. */}
+      {/* Overlapping cards share a grid cell, keeping the section height stable. */}
       <div className="relative grid grid-cols-1 items-center overflow-hidden py-3 sm:py-5">
-        {testimonials.map((testimonial, index) => {
-          const position = relativePosition(index, safeActive, count, direction)
-          const visible = count <= 3 || Math.min(
-            (index - safeActive + count) % count,
-            (safeActive - index + count) % count
-          ) <= 1
-          const isActive = index === safeActive
+        {OFFSETS.map((offset) => {
+          // The target is inserted in the incoming slot for dot navigation too.
+          const testimonialIndex = moving && offset === incomingOffset
+            ? target
+            : wrap(safeActive + offset, count)
+          const testimonial = testimonials[testimonialIndex]
+          const position = offset - (moving ? direction : 0)
+          const isCenter = offset === 0 && !moving
+          const sideButton = !moving && Math.abs(offset) === 1
 
-          // For two testimonials, show the other only on one side.
-          // For larger sets, offscreen recommendations stay hidden.
           return (
             <motion.div
-              key={testimonial.id}
+              key={`coverflow-slot-${offset}`}
               className="relative min-w-0 w-[94%] sm:w-[84%] lg:w-[78%] max-w-[900px] justify-self-center"
-              style={{ gridArea: '1 / 1', zIndex: isActive ? 30 : 10 }}
+              style={{ gridArea: '1 / 1', zIndex: isCenter ? 30 : offset === incomingOffset ? 20 : 10 }}
               initial={false}
-              animate={{
-                x: `${position * 81}%`,
-                scale: reducedMotion ? 1 : isActive ? 1 : 0.85,
-                opacity: !visible ? 0 : isActive ? 1 : 0.48,
-                filter: reducedMotion || isActive ? 'blur(0px)' : 'blur(2px)',
-              }}
+              animate={visualState(position, !!reducedMotion)}
               transition={{
-                duration: reducedMotion ? 0 : SLIDE_SECONDS,
+                duration: reducedMotion || !moving ? 0 : SLIDE_SECONDS,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              aria-label={isActive ? `Current recommendation: ${testimonial.name}` : undefined}
+              onAnimationComplete={() => {
+                if (offset === 0 && moving) finish()
+              }}
             >
-              <div className={isActive ? '' : 'pointer-events-none select-none'} aria-hidden={!isActive} inert={!isActive}>
+              <div
+                className={isCenter ? 'relative' : 'pointer-events-none select-none'}
+                aria-hidden={!isCenter}
+                inert={!isCenter}
+              >
                 <TestimonialCard testimonial={testimonial} variant="featured" />
               </div>
-              {!isActive && visible && (
+
+              {sideButton && (
                 <button
                   type="button"
                   className="absolute inset-0 z-10 cursor-pointer rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-500"
-                  aria-label={`Show recommendation from ${testimonial.name}`}
-                  onClick={() => go(index, position)}
+                  aria-label={`${offset < 0 ? 'Previous' : 'Next'} recommendation: ${testimonial.name}`}
+                  onClick={() => go(safeActive + offset, offset < 0 ? -1 : 1)}
                 />
               )}
             </motion.div>
@@ -144,10 +178,10 @@ export default function TestimonialCarousel({ testimonials }: Props) {
 
       <div className="mx-auto mt-5 flex max-w-[900px] flex-wrap items-center justify-between gap-3 px-1">
         <div className="flex items-center gap-2">
-          <button type="button" aria-label="Previous recommendation" onClick={() => go(safeActive - 1, -1)} className="glass inline-flex h-10 w-10 items-center justify-center rounded-xl text-slate-600 transition-colors hover:text-cyan-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-500 dark:text-slate-300">
+          <button type="button" aria-label="Previous recommendation" disabled={moving} onClick={() => go(safeActive - 1, -1)} className="glass inline-flex h-10 w-10 items-center justify-center rounded-xl text-slate-600 transition-colors hover:text-cyan-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-500 disabled:opacity-50 dark:text-slate-300">
             <ChevronLeft size={19} />
           </button>
-          <button type="button" aria-label="Next recommendation" onClick={() => go(safeActive + 1, 1)} className="glass inline-flex h-10 w-10 items-center justify-center rounded-xl text-slate-600 transition-colors hover:text-cyan-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-500 dark:text-slate-300">
+          <button type="button" aria-label="Next recommendation" disabled={moving} onClick={() => go(safeActive + 1, 1)} className="glass inline-flex h-10 w-10 items-center justify-center rounded-xl text-slate-600 transition-colors hover:text-cyan-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-500 disabled:opacity-50 dark:text-slate-300">
             <ChevronRight size={19} />
           </button>
           <button type="button" aria-label={paused ? 'Play automatic recommendation slides' : 'Pause automatic recommendation slides'} aria-pressed={paused} onClick={() => { setPaused((p) => !p); setResetKey((key) => key + 1) }} className="glass inline-flex h-10 w-10 items-center justify-center rounded-xl text-slate-600 transition-colors hover:text-cyan-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-500 dark:text-slate-300">
@@ -159,10 +193,11 @@ export default function TestimonialCarousel({ testimonials }: Props) {
             <button
               key={item.id}
               type="button"
+              disabled={moving}
               aria-label={`Show recommendation ${index + 1} of ${count}: ${item.name}`}
               aria-current={index === safeActive ? 'true' : undefined}
               onClick={() => go(index, index >= safeActive ? 1 : -1)}
-              className={`h-2 rounded-full transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-500 ${index === safeActive ? 'w-6 bg-cyan-500' : 'w-2 bg-slate-400/40 hover:bg-cyan-400/60'}`}
+              className={`h-2 rounded-full transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-500 disabled:opacity-50 ${index === safeActive ? 'w-6 bg-cyan-500' : 'w-2 bg-slate-400/40 hover:bg-cyan-400/60'}`}
             />
           ))}
         </div>

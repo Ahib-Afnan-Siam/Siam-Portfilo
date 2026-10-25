@@ -1,3 +1,4 @@
+
 'use client'
 
 import { motion } from 'framer-motion'
@@ -101,10 +102,13 @@ export default function Research({ variant = 'full' }: ResearchProps) {
   )
 
   const blogs = PUBLICATIONS.filter((item) => item.type === 'Blog')
+
   const visibleBlogs =
     variant === 'featured'
       ? blogs.filter((blog) => blog.featured)
       : blogs
+
+  const isSinglePaper = researchPapers.length === 1
 
   return (
     <section id="research" className="section-padding container-wide">
@@ -119,17 +123,33 @@ export default function Research({ variant = 'full' }: ResearchProps) {
       />
 
       <div className="space-y-12 max-w-6xl mx-auto">
-        <div>
-          <h3 className="text-slate-900 dark:text-white font-bold text-xl mb-5">
-            Research Paper
-          </h3>
+        {researchPapers.length > 0 && (
+          <div>
+            <h3
+              className={`text-slate-900 dark:text-white font-bold text-xl mb-5 ${
+                isSinglePaper ? 'text-center' : ''
+              }`}
+            >
+              Research Paper
+            </h3>
 
-          <div className="grid sm:grid-cols-1 lg:grid-cols-2 gap-6">
-            {researchPapers.map((item, i) => (
-              <PublicationCard key={item.id} item={item} i={i} />
-            ))}
+            <div
+              className={
+                isSinglePaper
+                  ? 'mx-auto w-full max-w-[900px]'
+                  : 'grid grid-cols-1 lg:grid-cols-2 gap-6'
+              }
+            >
+              {researchPapers.map((item, i) => (
+                <PublicationCard
+                  key={item.id}
+                  item={item}
+                  i={i}
+                />
+              ))}
+            </div>
           </div>
-        </div>
+        )}
 
         <div>
           <h3 className="text-slate-900 dark:text-white font-bold text-xl mb-5">
@@ -138,7 +158,11 @@ export default function Research({ variant = 'full' }: ResearchProps) {
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {visibleBlogs.map((item, i) => (
-              <PublicationCard key={item.id} item={item} i={i} />
+              <PublicationCard
+                key={item.id}
+                item={item}
+                i={i}
+              />
             ))}
           </div>
         </div>
